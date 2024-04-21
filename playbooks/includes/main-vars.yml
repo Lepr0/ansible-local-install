@@ -1,0 +1,50 @@
+# APT
+apts:
+  - gnome-shell-extension-manager
+  - gnome-weather
+  - gnome-tweaks
+  - neofetch
+  - mc
+  - adb
+  - flatpak
+  - tilix
+  - zsh
+  - nvtop
+  - smartmontools
+  - yt-dlp
+  - sshpass
+  - terraform
+  - timeshift # conf
+  - vim # conf
+#  - tlp
+#  - tlp-rdw
+  #ansible:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg-agent
+  - software-properties-common
+
+debs:
+  - http://repo.yandex.ru/yandex-disk/yandex-disk_latest_amd64.deb
+
+
+flatpaks:
+  - org.gnome.Evolution
+  - org.telegram.desktop
+  - com.google.Chrome
+  - ru.yandex.Browser
+  - org.filezillaproject.Filezilla
+  - com.jetbrains.DataGrip
+  - io.mpv.Mpv # conf
+  - org.gimp.GIMP
+  - org.onlyoffice.desktopeditors
+  - org.keepassxc.KeePassXC
+  - org.getoutline.OutlineManager
+  - org.getoutline.OutlineClient
+  - dev.k8slens.OpenLens
+  - com.valvesoftware.Steam
+  - org.qbittorrent.qBittorrent
+  - com.slack.Slack
+  - org.remmina.Remmina
+  - net.cozic.joplin_desktop
