@@ -31,6 +31,14 @@ alias fan-disable='sudo sh -c "echo 2 > /sys/devices/platform/asus-nb-wmi/hwmon/
 alias cat='/usr/bin/batcat --paging=never'
 alias docker-compose='docker compose'
 
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+alias ddel='docker system prune'
+alias drm='docker ps -aq | xargs docker rm'
+alias drmi='docker images -aq | xargs docker rmi'
+
 awsexport() {
 	export AWS_PROFILE="secret"
 	}
