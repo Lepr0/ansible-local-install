@@ -6,7 +6,7 @@
 - name: Install ohmyzsh
   ansible.builtin.shell: |
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
- when: not ohmyzsh_folder.stat.exists
+  when: not ohmyzsh_folder.stat.exists
 
 - name: Change shell
   become: true
