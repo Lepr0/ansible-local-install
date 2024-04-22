@@ -22,4 +22,3 @@
   ansible.builtin.apt:
     autoclean: yes
     autoremove: yes
-    purge: true
