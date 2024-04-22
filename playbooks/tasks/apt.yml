@@ -23,9 +23,6 @@
     src: "{{ item.url }}"
     dest: "/usr/sbin/"
     remote_src: yes
-    extra_opts:
-      - '--strip-components=1'
-    creates: "/usr/sbin/{{ item.name }}"
   loop: "{{ bins_archive }}"
 
 - name: Ensure binary is executable and accessible

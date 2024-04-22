@@ -37,7 +37,7 @@ debs:
 
 bins_archive: # to /usr/sbin
   - url: https://www.hdsentinel.com/hdslin/hdsentinel-020b-x64.zip
-    name: hdsentinel
+    name: HDSentinel
 
 flatpak_repo: "https://dl.flathub.org/repo/flathub.flatpakrepo"
 
