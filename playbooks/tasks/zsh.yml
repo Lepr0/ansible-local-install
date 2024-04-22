@@ -1,17 +1,23 @@
+- name: Check ohmyzsh folder
+  ansible.builtin.stat:
+    path: "/home/{{ ansible_env.USER }}/.oh-my-zsh"
+  register: ohmyzsh_folder
+
 - name: Install ohmyzsh
   ansible.builtin.shell: |
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+ when: not ohmyzsh_folder.stat.exists
 
 - name: Change shell
   become: true
   ansible.builtin.user:
-    name: ${USER}
+    name: "{{ ansible_env.USER }}"
     shell: /bin/zsh
 
 - name: Copy config
   ansible.builtin.template:
-    src: "templates/.zshrc.j2"
-    dest: "~/.zshrc"
+    src: "zshrc.j2"
+    dest: "/home/{{ ansible_env.USER }}/.zshrc"
 
 - name: Create a directory if it does not exist
   ansible.builtin.file:

@@ -5,8 +5,11 @@ apts:
   - gnome-weather
   - gnome-tweaks
   - neofetch
+  - speedtest-cli
   - mc
   - adb
+  - bat
+  - geoip-bin
   - flatpak
   - tilix
   - zsh
@@ -23,7 +26,6 @@ apts:
   - vim
   - tlp
   - tlp-rdw
-  #ansible:
   - apt-transport-https
   - ca-certificates
   - curl
@@ -32,6 +34,10 @@ apts:
 
 debs:
   - http://repo.yandex.ru/yandex-disk/yandex-disk_latest_amd64.deb
+
+bins_archive: # to /usr/sbin
+  - url: https://www.hdsentinel.com/hdslin/hdsentinel-020b-x64.zip
+    name: hdsentinel
 
 flatpak_repo: "https://dl.flathub.org/repo/flathub.flatpakrepo"
 
@@ -88,10 +94,10 @@ gnome_extensions_zip: #name should be uuid from metadata.json
   - url: "https://github.com/harshadgavali/gnome-gesture-improvements/files/14779174/gestureImprovements46%40gestures.zip"
     name: gestureImprovements@gestures
 
-gnome_extension_dir: "~/.local/share/gnome-shell/extensions/"
+gnome_extension_dir: "/home/{{ ansible_env.USER }}/.local/share/gnome-shell/extensions/"
 
 zsh_custom_plugins:
   - url: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
     name: zsh-syntax-highlighting
 
-zsh_custom_plugins_dir: "~/.oh-my-zsh/custom/plugins/"
+zsh_custom_plugins_dir: "/home/{{ ansible_env.USER }}/.oh-my-zsh/custom/plugins/"

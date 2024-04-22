@@ -17,6 +17,26 @@
     state: present
   with_items: "{{ debs }}"
 
+- name: Download and extract binary file
+  become: true
+  ansible.builtin.unarchive:
+    src: "{{ item.url }}"
+    dest: "/usr/sbin/"
+    remote_src: yes
+    extra_opts:
+      - '--strip-components=1'
+    creates: "/usr/sbin/{{ item.name }}"
+  loop: "{{ bins_archive }}"
+
+- name: Ensure binary is executable and accessible
+  become: true
+  ansible.builtin.file:
+    path: "/usr/sbin/{{ item.name }}"
+    mode: '0755'
+    owner: root
+    group: root
+  loop: "{{ bins_archive }}"
+
 - name: Clean
   become: true
   ansible.builtin.apt:
