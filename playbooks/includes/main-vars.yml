@@ -33,6 +33,7 @@ apts:
 debs:
   - http://repo.yandex.ru/yandex-disk/yandex-disk_latest_amd64.deb
 
+flatpak_repo: "https://dl.flathub.org/repo/flathub.flatpakrepo"
 
 flatpaks:
   - org.gnome.Evolution
