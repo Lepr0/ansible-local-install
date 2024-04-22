@@ -1,5 +1,4 @@
 - name: Install and enable GNOME extensions
-  become: false
   shell: roles/install-gnome-extensions/install-gnome-extensions.sh --enable {{ item.id }}
   loop: "{{ gnome_extensions }}"
 
