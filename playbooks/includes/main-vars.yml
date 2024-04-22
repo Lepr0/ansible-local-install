@@ -20,8 +20,8 @@ apts:
   - unzip
   - timeshift # conf
   - vim # conf
-#  - tlp
-#  - tlp-rdw
+  - tlp
+  - tlp-rdw
   #ansible:
   - apt-transport-https
   - ca-certificates
@@ -52,6 +52,11 @@ flatpaks:
   - com.slack.Slack
   - org.remmina.Remmina
   - net.cozic.joplin_desktop
+
+services_enabled:
+  - tlp.service
+  - docker.service
+  - docker.socket
 
 gnome_extensions:
   - id: 8

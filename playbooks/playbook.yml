@@ -12,6 +12,7 @@
 
   tasks:
     - include_tasks: tasks/apt.yml
+    - include_tasks: tasks/services-enable.yml
     - include_tasks: tasks/extensions.yml
     - include_tasks: tasks/flatpak.yml
 
