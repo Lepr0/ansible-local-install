@@ -3,27 +3,23 @@
   ansible.builtin.apt:
     update_cache: yes
 
-- name: Install packages
+- name: Install apt packages
   become: true
   ansible.builtin.apt:
     name: "{{ item }}"
     state: present
   with_items: "{{ apts }}"
 
-- name: Install a .deb package
+- name: Install deb packages
   become: true
   ansible.builtin.apt:
     deb: "{{ item }}"
     state: present
   with_items: "{{ debs }}"
 
-- name: Remove useless packages from the cache
+- name: Clean
   become: true
   ansible.builtin.apt:
     autoclean: yes
-
-- name: Remove dependencies that are no longer required and purge their configuration files
-  become: true
-  ansible.builtin.apt:
     autoremove: yes
     purge: true
