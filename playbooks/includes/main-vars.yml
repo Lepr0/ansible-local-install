@@ -99,3 +99,6 @@ zsh_custom_plugins:
     name: zsh-syntax-highlighting
 
 zsh_custom_plugins_dir: "/home/{{ ansible_env.USER }}/.oh-my-zsh/custom/plugins/"
+
+docker_users:
+  - "{{ ansible_env.USER }}"
