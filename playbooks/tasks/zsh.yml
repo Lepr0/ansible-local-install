@@ -1,0 +1,26 @@
+- name: Install ohmyzsh
+  ansible.builtin.shell: |
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+- name: Change shell
+  become: true
+  ansible.builtin.user:
+    name: ${USER}
+    shell: /bin/zsh
+
+- name: Copy config
+  ansible.builtin.template:
+    src: "templates/.zshrc.j2"
+    dest: "~/.zshrc"
+
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: "{{ zsh_custom_plugins_dir }}/{{ item.name }}"
+    state: directory
+  with_items: "{{ zsh_custom_plugins }}"
+
+- name: Download custom plugins
+  ansible.builtin.git:
+    repo: "{{ item.url }}"
+    dest: "{{ zsh_custom_plugins_dir }}/{{ item.name }}"
+  with_items: "{{ zsh_custom_plugins }}"

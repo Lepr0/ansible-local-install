@@ -1,0 +1,52 @@
+export ZSH="/home/${{ USER }}/.oh-my-zsh"
+
+ZSH_THEME="robbyrussell"
+
+HISTSIZE=999999999
+SAVEHIST=$HISTSIZE
+
+plugins=(
+zsh-navigation-tools
+zsh-syntax-highlighting
+git
+bundler
+dotenv
+macos
+rake
+rbenv
+ruby
+)
+
+source $ZSH/oh-my-zsh.sh
+
+alias ll='ls -lah'
+alias la='ls -A'
+alias l='ls -CF'
+alias myip='curl -s http://ifconfig.co/json | jq'
+alias p='ping -D -O'
+alias geo='geoiplookup'
+alias speedtest='~/Apps/speedtest'
+alias hdsentinel='sudo ~/Apps/HDSentinel'
+alias fan-enable='sudo sh -c "echo 0 > /sys/devices/platform/asus-nb-wmi/hwmon/hwmon5/pwm2_enable && echo 0 > /sys/devices/platform/asus-nb-wmi/hwmon/hwmon5/pwm1_enable"'
+alias fan-disable='sudo sh -c "echo 2 > /sys/devices/platform/asus-nb-wmi/hwmon/hwmon5/pwm2_enable && echo 2 > /sys/devices/platform/asus-nb-wmi/hwmon/hwmon5/pwm1_enable"'
+alias memory='sudo /home/lepr0/scripts/ps_mem.py'
+alias cat='/usr/bin/batcat --paging=never'
+
+awsexport() {
+	export AWS_PROFILE="secret"
+	}
+
+###
+help() {
+        curl cheat.sh/$1
+       }
+###
+export PATH="$HOME/.local/bin/:$PATH"
+export PATH=$PATH:/usr/local/go/bin
+
+for possiblekey in ${HOME}/.ssh/*_rsa; do
+	if grep -q PRIVATE "$possiblekey"; then
+		ssh-add "$possiblekey" 2>/dev/null
+			fi
+			done
+cd ~

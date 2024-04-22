@@ -89,3 +89,9 @@ gnome_extensions_zip: #name should be uuid from metadata.json
     name: gestureImprovements@gestures
 
 gnome_extension_dir: "~/.local/share/gnome-shell/extensions/"
+
+zsh_custom_plugins:
+  - url: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+    name: zsh-syntax-highlighting
+
+zsh_custom_plugins_dir: "~/.oh-my-zsh/custom/plugins/"
