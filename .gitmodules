@@ -1,9 +1,9 @@
-[submodule "playbooks/roles/ansible-role-zsh"]
-	path = playbooks/roles/ansible-role-zsh
-	url = https://github.com/viasite-ansible/ansible-role-zsh.git
-[submodule "playbooks/roles/ansible-role-docker"]
-	path = playbooks/roles/ansible-role-docker
-	url = https://github.com/geerlingguy/ansible-role-docker.git
 [submodule "playbooks/roles/install-gnome-extensions"]
 	path = playbooks/roles/install-gnome-extensions
 	url = https://github.com/ToasterUwU/install-gnome-extensions.git
+[submodule "playbooks/roles/ansible-role-docker"]
+	path = playbooks/roles/ansible-role-docker
+	url = https://github.com/geerlingguy/ansible-role-docker.git
+[submodule "playbooks/roles/ansible-role-zsh"]
+	path = playbooks/roles/ansible-role-zsh
+	url = https://github.com/viasite-ansible/ansible-role-zsh.git
