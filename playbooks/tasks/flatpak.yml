@@ -1,4 +1,5 @@
 - name: Add flatpack repo
+  become: true
   ansible.builtin.shell: |
     flatpak remote-add --if-not-exists flathub {{ flatpak_repo }}
 

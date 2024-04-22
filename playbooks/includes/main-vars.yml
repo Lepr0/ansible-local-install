@@ -63,8 +63,6 @@ flatpaks:
 
 services_enabled:
   - tlp.service
-  - docker.service
-  - docker.socket
 
 gnome_extensions:
   - id: 8
