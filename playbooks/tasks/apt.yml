@@ -11,16 +11,19 @@
   with_items: "{{ apts }}"
 
 - name: Install a .deb package
+  become: true
   ansible.builtin.apt:
     deb: "{{ item }}"
     state: present
   with_items: "{{ debs }}"
 
 - name: Remove useless packages from the cache
+  become: true
   ansible.builtin.apt:
     autoclean: yes
 
 - name: Remove dependencies that are no longer required and purge their configuration files
+  become: true
   ansible.builtin.apt:
     autoremove: yes
     purge: true

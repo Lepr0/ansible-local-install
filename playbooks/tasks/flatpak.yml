@@ -1,4 +1,5 @@
 - name: Install multiple packages
+  become: false
   community.general.flatpak:
     name: "{{ item }}"
     state: present

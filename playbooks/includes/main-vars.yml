@@ -8,12 +8,16 @@ apts:
   - adb
   - flatpak
   - tilix
-  - zsh
+#  - zsh - role
   - nvtop
   - smartmontools
   - yt-dlp
   - sshpass
   - terraform
+  - wget
+  - jq
+  - sed
+  - unzip
   - timeshift # conf
   - vim # conf
 #  - tlp
@@ -48,3 +52,33 @@ flatpaks:
   - com.slack.Slack
   - org.remmina.Remmina
   - net.cozic.joplin_desktop
+
+gnome_extensions:
+  - id: 8
+    name: places-status-indicator
+  - id: 517
+    name: caffeine
+  - id: 4679
+    name: burn-my-windows
+  - id: 5985
+    name: do-not-disturb-while-screen-sharing-or-recording
+  - id: 5410
+    name: grand-theft-focus
+  - id: 4451
+    name: logo-menu
+  - id: 1460
+    name: vitals
+  - id: 5904
+    name: volume-scroller
+  - id: 5470
+    name: weather-oclock
+#  - id: 5278
+#    name: pano # no 46 support # https://github.com/oae/gnome-shell-pano/issues/271
+#  - id: 2594
+#    name: always-indicator # no 46 support # https://github.com/mzur/gnome-shell-always-indicator/issues/21
+
+gnome_extensions_zip: #name should be uuid from metadata.json
+  - url: "https://github.com/harshadgavali/gnome-gesture-improvements/files/14779174/gestureImprovements46%40gestures.zip"
+    name: gestureImprovements@gestures
+
+gnome_extension_dir: "~/.local/share/gnome-shell/extensions/"

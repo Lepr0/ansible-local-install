@@ -1,0 +1,22 @@
+- name: Install and enable GNOME extensions
+  become: false
+  shell: roles/install-gnome-extensions/install-gnome-extensions.sh --enable {{ item.id }}
+  loop: "{{ gnome_extensions }}"
+
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: "{{ gnome_extension_dir }}/{{ item.name }}"
+    state: directory
+  loop: "{{ gnome_extensions_zip }}"
+
+- name: Download and extract GNOME extensions
+  ansible.builtin.unarchive:
+    src: "{{ item.url }}"
+    dest: "{{ gnome_extension_dir }}/{{ item.name }}"
+    remote_src: yes
+  loop: "{{ gnome_extensions_zip }}"
+
+- name: Enable GNOME extensions
+  ansible.builtin.shell: |
+    gnome-extensions enable {{ item.name }}
+  loop: "{{ gnome_extensions_zip }}"

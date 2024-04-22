@@ -4,6 +4,6 @@
 [submodule "playbooks/roles/ansible-role-docker"]
 	path = playbooks/roles/ansible-role-docker
 	url = git@github.com:geerlingguy/ansible-role-docker.git
-[submodule "playbooks/roles/ansible-role-customize-gnome"]
-	path = playbooks/roles/ansible-role-customize-gnome
-	url = git@github.com:PeterMosmans/ansible-role-customize-gnome.git
+[submodule "playbooks/roles/install-gnome-extensions"]
+	path = playbooks/roles/install-gnome-extensions
+	url = git@github.com:ToasterUwU/install-gnome-extensions.git

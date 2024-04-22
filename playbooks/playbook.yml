@@ -1,17 +1,19 @@
 - name: All servers setup
   hosts: all
-  become: yes
+  become_method: sudo
   connection: local
+
+  vars_files:
+    - includes/main-vars.yml
 
   roles:
     - role: ansible-role-docker
     - role: ansible-role-zsh
-    - role: ansible-role-customize-gnome
 
   tasks:
-    - include_vars:
-        file: includes/main-vars.yml
     - include_tasks: tasks/apt.yml
+    - include_tasks: tasks/extensions.yml
+    - include_tasks: tasks/flatpak.yml
 
 #    - include_tasks: tasks/package-dependencies.yaml
 #    - include_tasks: tasks/package-install.yaml
