@@ -15,6 +15,16 @@
   roles:
     - role: ansible-role-docker
       become: true
+    - role: ansible-role-customize-gnome
+      become: true
+      vars:
+        gnome_extensions:
+        - id: 8
+        - id: 517
+        - id: 4679
+        - url: "https://github.com/harshadgavali/gnome-gesture-improvements/files/14779174/gestureImprovements46%40gestures.zip"
+          name: gestureImprovements@gestures
+        - enabled: yes
 
   post_tasks:
     - include_tasks: tasks/services-enable.yml
