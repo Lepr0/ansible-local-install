@@ -6,20 +6,12 @@
   vars_files:
     - includes/main-vars.yml
 
-  roles:
-    - role: ansible-role-docker
-    - role: ansible-role-zsh
-
-  tasks:
+  pre_tasks:
     - include_tasks: tasks/apt.yml
     - include_tasks: tasks/services-enable.yml
     - include_tasks: tasks/extensions.yml
     - include_tasks: tasks/flatpak.yml
 
-#    - include_tasks: tasks/package-dependencies.yaml
-#    - include_tasks: tasks/package-install.yaml
-#    - include_tasks: tasks/git-setup.yaml
-#    - include_tasks: tasks/dotfiles.yaml
-#    - include_tasks: tasks/security.yaml
-#    - include_tasks: tasks/service-enable.yaml
-#    - include_tasks: tasks/docker.yaml
+  roles:
+    - role: ansible-role-docker
+    - role: ansible-role-zsh
