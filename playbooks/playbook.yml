@@ -8,10 +8,12 @@
 
   pre_tasks:
     - include_tasks: tasks/apt.yml
-    - include_tasks: tasks/services-enable.yml
     - include_tasks: tasks/extensions.yml
     - include_tasks: tasks/flatpak.yml
 
   roles:
     - role: ansible-role-docker
     - role: ansible-role-zsh
+
+  post_tasks:
+    - include_tasks: tasks/services-enable.yml
