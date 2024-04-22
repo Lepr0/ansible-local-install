@@ -24,7 +24,7 @@
         - id: 4679
         - url: "https://github.com/harshadgavali/gnome-gesture-improvements/files/14779174/gestureImprovements46%40gestures.zip"
           name: gestureImprovements@gestures
-        - enabled: yes
+        customize_gnome__skip_restart_gnome_shell: true
 
   post_tasks:
     - include_tasks: tasks/services-enable.yml
