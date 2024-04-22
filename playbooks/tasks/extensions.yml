@@ -4,18 +4,16 @@
 
 - name: Create a directory if it does not exist
   ansible.builtin.file:
-    path: "{{ gnome_extension_dir }}/{{ item.name }}"
+    path: "{{ gnome_extension_dir }}/temp"
     state: directory
-  loop: "{{ gnome_extensions_zip }}"
 
-- name: Download and extract GNOME extensions
-  ansible.builtin.unarchive:
-    src: "{{ item.url }}"
-    dest: "{{ gnome_extension_dir }}/{{ item.name }}"
-    remote_src: yes
+- name: Download file with custom HTTP headers
+  ansible.builtin.get_url:
+    url: "{{ item.url }}"
+    dest: "{{ gnome_extension_dir }}/temp/{{ item.name }}.zip"
   loop: "{{ gnome_extensions_zip }}"
 
 - name: Enable GNOME extensions
   ansible.builtin.shell: |
-    gnome-extensions enable {{ item.name }}
+    gnome-extensions install -f {{ gnome_extension_dir }}/temp/{{ item.name }}.zip
   loop: "{{ gnome_extensions_zip }}"
