@@ -15,8 +15,6 @@
   roles:
     - role: ansible-role-docker
       become: true
-    - role: ansible-role-zsh
-      become: true
 
   post_tasks:
     - include_tasks: tasks/services-enable.yml

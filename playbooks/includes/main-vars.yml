@@ -9,7 +9,7 @@ apts:
   - adb
   - flatpak
   - tilix
-#  - zsh - role
+  - zsh
   - nvtop
   - smartmontools
   - yt-dlp
@@ -20,7 +20,7 @@ apts:
   - sed
   - unzip
   - timeshift # conf
-  - vim # conf
+  - vim
   - tlp
   - tlp-rdw
   #ansible:
