@@ -1,6 +1,7 @@
 # APT
 apts:
   - gnome-shell-extension-manager
+  - gnome-software-plugin-flatpak
   - gnome-weather
   - gnome-tweaks
   - neofetch

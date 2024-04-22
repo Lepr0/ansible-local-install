@@ -1,5 +1,9 @@
+- name: Add flatpack repo
+  ansible.builtin.shell: |
+    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
 - name: Install multiple packages
   community.general.flatpak:
     name: "{{ item }}"
     state: present
-  with_items: "{{ flatpaks }}"
+  loop: "{{ flatpaks }}"
