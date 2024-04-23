@@ -6,6 +6,7 @@ apts:
   - gnome-tweaks
   - neofetch
   - speedtest-cli
+  - bind9-dnsutils
   - mc
   - adb
   - bat
