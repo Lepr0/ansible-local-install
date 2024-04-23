@@ -2,15 +2,15 @@
 apts:
   - gnome-shell-extension-manager
   - gnome-software-plugin-flatpak
-  - gnome-weather
+#  - gnome-weather
   - gnome-tweaks
   - neofetch
-  - speedtest-cli
-  - bind9-dnsutils
+#  - speedtest-cli
+#  - bind9-dnsutils
   - mc
-  - adb
+#  - adb
   - bat
-  - geoip-bin
+#  - geoip-bin
   - flatpak
   - tilix
   - zsh
@@ -21,7 +21,7 @@ apts:
 #  - terraform
   - wget
   - jq
-  - sed
+#  - sed
   - unzip
   - timeshift # conf
   - vim
@@ -30,8 +30,8 @@ apts:
   - apt-transport-https
   - ca-certificates
   - curl
-  - gnupg-agent
-  - software-properties-common
+#  - gnupg-agent
+#  - software-properties-common
 
 debs:
   - http://repo.yandex.ru/yandex-disk/yandex-disk_latest_amd64.deb
@@ -55,35 +55,35 @@ flatpaks:
   - org.keepassxc.KeePassXC
   - org.getoutline.OutlineManager
   - org.getoutline.OutlineClient
-  - dev.k8slens.OpenLens
+#  - dev.k8slens.OpenLens
   - com.valvesoftware.Steam
   - org.qbittorrent.qBittorrent
-  - com.slack.Slack
-  - org.remmina.Remmina
-  - net.cozic.joplin_desktop
+#  - com.slack.Slack
+#  - org.remmina.Remmina
+#  - net.cozic.joplin_desktop
 
 services_enabled:
   - tlp.service
 
 gnome_extensions:
-  - id: 8
-    name: places-status-indicator
-  - id: 517
-    name: caffeine
-  - id: 4679
-    name: burn-my-windows
-  - id: 5985
-    name: do-not-disturb-while-screen-sharing-or-recording
+#  - id: 8
+#    name: places-status-indicator
+#  - id: 517
+#    name: caffeine
+#  - id: 4679
+#    name: burn-my-windows
+#  - id: 5985
+#    name: do-not-disturb-while-screen-sharing-or-recording
   - id: 5410
     name: grand-theft-focus
   - id: 4451
     name: logo-menu
   - id: 1460
     name: vitals
-  - id: 5904
-    name: volume-scroller
-  - id: 5470
-    name: weather-oclock
+#  - id: 5904
+#    name: volume-scroller
+#  - id: 5470
+#    name: weather-oclock
 #  - id: 5278
 #    name: pano # no 46 support # https://github.com/oae/gnome-shell-pano/issues/271
 #  - id: 2594
