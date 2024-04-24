@@ -1,41 +1,112 @@
-- name: Update repositories cache
-  become: true
-  ansible.builtin.apt:
-    update_cache: yes
+- name: apt
+  block:
+    - name: Update repositories cache
+      become: true
+      ansible.builtin.apt:
+        update_cache: yes
 
-- name: Install apt packages
-  become: true
-  ansible.builtin.apt:
-    name: "{{ item }}"
-    state: present
-  with_items: "{{ apts }}"
+    - name: Install apt packages
+      become: true
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ apts }}"
 
-- name: Install deb packages
-  become: true
-  ansible.builtin.apt:
-    deb: "{{ item }}"
-    state: present
-  with_items: "{{ debs }}"
+    - name: Clean
+      become: true
+      ansible.builtin.apt:
+        autoclean: yes
+        autoremove: yes
 
-- name: Download and extract binary file
-  become: true
-  ansible.builtin.unarchive:
-    src: "{{ item.url }}"
-    dest: "/usr/sbin/"
-    remote_src: yes
-  loop: "{{ bins_archive }}"
+- name: debs
+  block:
+    - name: Install deb packages
+      become: true
+      ansible.builtin.apt:
+        deb: "{{ item }}"
+        state: present
+      with_items: "{{ debs }}"
 
-- name: Ensure binary is executable and accessible
-  become: true
-  ansible.builtin.file:
-    path: "/usr/sbin/{{ item.name }}"
-    mode: '0755'
-    owner: root
-    group: root
-  loop: "{{ bins_archive }}"
+- name: bins_archive
+  block:
+    - name: Check if bins_archive already exist in /usr/sbin
+      stat:
+        path: "/usr/sbin/{{ item.name }}"
+      register: bin_archive_stat
+      loop: "{{ bins_archive }}"
 
-- name: Clean
-  become: true
-  ansible.builtin.apt:
-    autoclean: yes
-    autoremove: yes
+    - name: Create temporary directory for archive extraction
+      ansible.builtin.file:
+        path: "/tmp/bins_archive"
+        state: directory
+      when: not item.1.stat.exists
+
+    - name: Download archives if not exist in /usr/sbin
+      ansible.builtin.get_url:
+        url: "{{ item.0.url }}"
+        dest: "/tmp/bins_archive/{{ item.0.name }}.archive"
+        mode: '0755'
+      loop: "{{ bins_archive|zip(bin_archive_stat.results)|list }}"
+      when: not item.1.stat.exists
+
+    - name: Extract archives
+      ansible.builtin.unarchive:
+        src: "/tmp/bins_archive/{{ item.0.name }}.archive"
+        dest: "/tmp/bins_archive"
+        remote_src: yes
+      loop: "{{ bins_archive|zip(bin_archive_stat.results)|list }}"
+      when: not item.1.stat.exists
+
+    - name: Find and move the binary to the destination
+      command:
+        cmd: "find /tmp/bins_archive -type f -name '{{ item.0.name }}' -exec mv {} /usr/sbin \\;"
+      loop: "{{ bins_archive|zip(bin_archive_stat.results)|list }}"
+      when: not item.1.stat.exists
+
+    - name: Set permissions for binaries in /usr/sbin
+      ansible.builtin.file:
+        path: "/usr/sbin/{{ item.0.name }}"
+        mode: '0755'
+        owner: root
+        group: root
+      loop: "{{ bins_archive|zip(bin_archive_stat.results)|list }}"
+
+    - name: Symlink if newname exist
+      ansible.builtin.file:
+        src: mv /usr/sbin/{{ item.0.name }}
+        dest: /usr/sbin/{{ item.0.new_name }}
+        mode: '0755'
+        owner: root
+        group: root
+      when: item.0.new_name is defined
+
+    - name: Remove temporary directory
+      ansible.builtin.file:
+        path: "/tmp/bins_archive"
+        state: absent
+      when: temp_dir is defined
+
+- name: bins
+  block:
+    - name: Check if bins already exist in /usr/sbin
+      stat:
+        path: "/usr/sbin/{{ item.name }}"
+      register: bin_stat
+      loop: "{{ bins }}"
+
+    - name: Download binary file
+      become: true
+      ansible.builtin.get_url:
+        src: "{{ item.url }}"
+        dest: "/usr/sbin/{{ item.name }}"
+      loop: "{{ bins }}"
+      when: not item.1.stat.exists
+
+    - name: Ensure binary is executable and accessible
+      become: true
+      ansible.builtin.file:
+        path: "/usr/sbin/{{ item.name }}"
+        mode: '0755'
+        owner: root
+        group: root
+      loop: "{{ bins }}"
