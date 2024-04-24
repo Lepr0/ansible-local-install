@@ -9,3 +9,15 @@
       ansible.posix.synchronize:
         src: "configs/mpv"
         dest: "{{ configs_mpv_folder }}"
+
+- name: Copy fonts
+  block:
+    - name: Ensure folder exist
+      ansible.builtin.file:
+        path: "{{ fonts_folder }}"
+        state: directory
+
+    - name: Copy the entire mpv directory to fonts folder
+      ansible.posix.synchronize:
+        src: "configs/fonts"
+        dest: "{{ fonts_folder }}"
