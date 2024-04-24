@@ -1,0 +1,11 @@
+- name: Copy mpv configs
+  block:
+    - name: Ensure folder exist
+      ansible.builtin.file:
+        path: "{{ configs_mpv_folder }}"
+        state: directory
+
+    - name: Copy the entire mpv directory to ~/.config
+      ansible.posix.synchronize:
+        src: "configs/mpv"
+        dest: "{{ configs_mpv_folder }}"
