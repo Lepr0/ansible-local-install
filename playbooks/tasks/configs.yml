@@ -1,0 +1,12 @@
+- name: mpv
+  block:
+    - name: Copy the entire mpv directory to ~/.config
+      ansible.builtin.copy:
+        src: "configs/mpv/"
+        dest: "{{ configs_mpv_folder }}"
+        mode: '0664'
+        directory_mode: '0700'
+        owner: "{{ ansible_env.USER }}"
+        group: "{{ ansible_env.USER }}"
+        remote_src: no
+        copy: yes
