@@ -43,6 +43,8 @@ bins_archive: # to /usr/sbin
     name: kubens
   - url: https://install.speedtest.net/app/cli/ookla-speedtest-1.2.0-linux-x86_64.tgz
     name: speedtest
+  - url: https://get.helm.sh/helm-v3.14.4-linux-amd64.tar.gz
+    name: helm
 
 bins: # to /usr/sbin
   - url: https://cdn.dl.k8s.io/release/v1.30.0/bin/linux/amd64/kubectl
