@@ -18,3 +18,15 @@
   ansible.builtin.shell: |
     gnome-extensions install -f {{ gnome_extension_dir }}/temp/{{ item.name }}.zip
   loop: "{{ gnome_extensions_zip }}"
+
+- name: Copy gesture-extension custom config #https://github.com/harshadgavali/gnome-gesture-improvements/issues/206#issuecomment-2026336600
+  block:
+    - name: Ensure folder exist
+      ansible.builtin.file:
+        path: "{{ gnome_extension_dir }}/gestureImprovements@gestures/src"
+        state: directory
+
+    - name: Copy the entire mpv directory to fonts folder
+      ansible.posix.synchronize:
+        src: "configs/gesture-extension/snapWindow.js"
+        dest: "{{ gnome_extension_dir }}/gestureImprovements@gestures/src/snapWindow.js"
