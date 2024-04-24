@@ -3,7 +3,6 @@ apts:
   - gnome-software-plugin-flatpak
   - gnome-tweaks
   - neofetch
-  - speedtest-cli
   - bind9-dnsutils
   - mc
   - adb
@@ -42,8 +41,10 @@ bins_archive: # to /usr/sbin
     name: kubectx
   - url: https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubens_v0.9.5_linux_x86_64.tar.gz
     name: kubens
+  - url: https://install.speedtest.net/app/cli/ookla-speedtest-1.2.0-linux-x86_64.tgz
+    name: speedtest
 
-bins:
+bins: # to /usr/sbin
   - url: https://cdn.dl.k8s.io/release/v1.30.0/bin/linux/amd64/kubectl
     name: kubectl
 

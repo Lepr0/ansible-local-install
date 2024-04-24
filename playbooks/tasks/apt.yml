@@ -29,93 +29,89 @@
 
 - name: bins_archive
   block:
-    - name: Check if bins_archive already exist in /usr/sbin
-      ansible.builtin.stat:
-        path: "/usr/sbin/{{ item.name }}"
-      register: bin_archive_stat
-      loop: "{{ bins_archive }}"
-      loop_control:
-        label: "{{ item.name }}"
-        loop_var: archive_item
-
-    - name: Create temporary directory for archive extraction
+    - name: Create archive dir
       ansible.builtin.file:
         path: "/tmp/bins_archive"
         state: directory
-      when: not bin_archive_stat.results | map(attribute='stat.exists') | list | unique | first
 
-    - name: Download archives if not exist in /usr/sbin
+    - name: Check if binary already exists in /usr/sbin
+      ansible.builtin.stat:
+        path: "/usr/sbin/{{ item.name }}"
+      register: binary_status
+      loop: "{{ bins_archive }}"
+
+    - name: Download archives if not exist
       ansible.builtin.get_url:
-        url: "{{ item.0.url }}"
-        dest: "/tmp/bins_archive/{{ item.0.name }}.archive"
+        url: "{{ item.item.url }}"
+        dest: "/tmp/bins_archive/{{ item.item.name }}.archive"
         mode: '0755'
-      loop: "{{ bins_archive | zip(bin_archive_stat.results) | list }}"
-      when: not item.1.stat.exists
+      loop: "{{ binary_status.results }}"
+      when: not item.stat.exists
+      loop_control:
+        label: "{{ item.item.name }}"
 
-    - name: Extract archives
+    - name: Extract archives if binary does not exist
       ansible.builtin.unarchive:
-        src: "/tmp/bins_archive/{{ item.0.name }}.archive"
+        src: "/tmp/bins_archive/{{ item.item.name }}.archive"
         dest: "/tmp/bins_archive"
         remote_src: yes
-      loop: "{{ bins_archive | zip(bin_archive_stat.results) | list }}"
-      when: not item.1.stat.exists
+      loop: "{{ binary_status.results }}"
+      when: not item.stat.exists
+      loop_control:
+        label: "{{ item.item.name }}"
 
-    - name: Find and move the binary to the destination
+    - name: Move binaries to /usr/sbin if not already there
       become: true
       ansible.builtin.command:
-        cmd: "find /tmp/bins_archive -type f -name '{{ item.0.name }}' -exec mv {} /usr/sbin \\;"
-      loop: "{{ bins_archive | zip(bin_archive_stat.results) | list }}"
-      when: not item.1.stat.exists
+        cmd: "find /tmp/bins_archive -type f -name {{ item.item.name }} -exec mv {} /usr/sbin \\;"
+      loop: "{{ binary_status.results }}"
+      when: not item.stat.exists
+      loop_control:
+        label: "{{ item.item.name }}"
 
     - name: Set permissions for binaries in /usr/sbin
       become: true
       ansible.builtin.file:
-        path: "/usr/sbin/{{ item.0.name }}"
+        path: "/usr/sbin/{{ item.item.name }}"
         mode: '0755'
         owner: root
         group: root
-      loop: "{{ bins_archive | zip(bin_archive_stat.results) | list }}"
+      loop: "{{ binary_status.results }}"
+      when: not item.stat.exists
       loop_control:
-        label: "{{ item.0.name }}"
+        label: "{{ item.item.name }}"
 
-    - name: Symlink if newname exist
+    - name: Create symlinks if new name is provided and binary does not exist
       become: true
       ansible.builtin.file:
-        src: "/usr/sbin/{{ item.0.name }}"
-        dest: "/usr/sbin/{{ item.0.new_name }}"
+        src: "/usr/sbin/{{ item.item.name }}"
+        dest: "/usr/sbin/{{ item.item.new_name }}"
         state: link
-        mode: '0755'
-        owner: root
-        group: root
-      loop: "{{ bins_archive | zip(bin_archive_stat.results) | list }}"
-      when: item.0.new_name is defined
-
-    - name: Remove temporary directory
-      ansible.builtin.file:
-        path: "/tmp/bins_archive"
-        state: absent
+      loop: "{{ binary_status.results }}"
+      when:
+        - not item.stat.exists
+        - item.item.new_name is defined
+      loop_control:
+        label: "{{ item.item.new_name }}"
+      ignore_errors: true # fk it
 
 - name: bins
   block:
-    - name: Check if bins already exist in /usr/sbin
-      stat:
+    - name: Check if bin already exists in /usr/sbin
+      ansible.builtin.stat:
         path: "/usr/sbin/{{ item.name }}"
-      register: bin_stat
       loop: "{{ bins }}"
+      register: bin_status
 
-    - name: Download binary file
+    - name: Downloading bins if not exists
       become: true
       ansible.builtin.get_url:
-        url: "{{ item.url }}"
-        dest: "/usr/sbin/{{ item.name }}"
-      loop: "{{ bins }}"
-      when: not bin_stat.results[ansible_loop.index0].stat.exists
-
-    - name: Ensure binary is executable and accessible
-      become: true
-      ansible.builtin.file:
-        path: "/usr/sbin/{{ item.name }}"
+        url: "{{ item.item.url }}"
+        dest: "/usr/sbin/{{ item.item.name }}"
         mode: '0755'
         owner: root
         group: root
-      loop: "{{ bins }}"
+      loop: "{{ bin_status.results }}"
+      when: not item.stat.exists
+      loop_control:
+        label: "{{ item.item.name }}"
