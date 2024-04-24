@@ -16,7 +16,7 @@ apts:
   - smartmontools
   - yt-dlp
   - sshpass
-#  - terraform
+  #  - terraform
   - wget
   - jq
   - sed
@@ -50,6 +50,8 @@ bins_archive: # to /usr/sbin
 bins: # to /usr/sbin
   - url: https://cdn.dl.k8s.io/release/v1.30.0/bin/linux/amd64/kubectl
     name: kubectl
+  - url: https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+    name: argocd
 
 flatpak_repo: "https://dl.flathub.org/repo/flathub.flatpakrepo"
 
@@ -61,6 +63,7 @@ flatpaks:
   - org.telegram.desktop
   - com.google.Chrome
   - ru.yandex.Browser
+  - ru.linux_gaming.PortProton
   - io.github.seadve.Kooha
   - org.filezillaproject.Filezilla
   - com.jetbrains.DataGrip
