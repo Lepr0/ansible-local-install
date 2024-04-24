@@ -58,12 +58,14 @@
       when: not item.1.stat.exists
 
     - name: Find and move the binary to the destination
+      become: true
       command:
         cmd: "find /tmp/bins_archive -type f -name '{{ item.0.name }}' -exec mv {} /usr/sbin \\;"
       loop: "{{ bins_archive|zip(bin_archive_stat.results)|list }}"
       when: not item.1.stat.exists
 
     - name: Set permissions for binaries in /usr/sbin
+      become: true
       ansible.builtin.file:
         path: "/usr/sbin/{{ item.0.name }}"
         mode: '0755'
@@ -72,6 +74,7 @@
       loop: "{{ bins_archive|zip(bin_archive_stat.results)|list }}"
 
     - name: Symlink if newname exist
+      become: true
       ansible.builtin.file:
         src: mv /usr/sbin/{{ item.0.name }}
         dest: /usr/sbin/{{ item.0.new_name }}
