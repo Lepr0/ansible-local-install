@@ -1,41 +1,116 @@
-- name: Update repositories cache
-  become: true
-  ansible.builtin.apt:
-    update_cache: yes
+- name: apt
+  block:
+    - name: Update repositories cache
+      become: true
+      ansible.builtin.apt:
+        update_cache: yes
 
-- name: Install apt packages
-  become: true
-  ansible.builtin.apt:
-    name: "{{ item }}"
-    state: present
-  with_items: "{{ apts }}"
+    - name: Install apt packages
+      become: true
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ apts }}"
 
-- name: Install deb packages
-  become: true
-  ansible.builtin.apt:
-    deb: "{{ item }}"
-    state: present
-  with_items: "{{ debs }}"
+    - name: Clean
+      become: true
+      ansible.builtin.apt:
+        autoclean: yes
+        autoremove: yes
 
-- name: Download and extract binary file
-  become: true
-  ansible.builtin.unarchive:
-    src: "{{ item.url }}"
-    dest: "/usr/sbin/"
-    remote_src: yes
-  loop: "{{ bins_archive }}"
+- name: debs
+  block:
+    - name: Install deb packages
+      become: true
+      ansible.builtin.apt:
+        deb: "{{ item }}"
+        state: present
+      with_items: "{{ debs }}"
 
-- name: Ensure binary is executable and accessible
-  become: true
-  ansible.builtin.file:
-    path: "/usr/sbin/{{ item.name }}"
-    mode: '0755'
-    owner: root
-    group: root
-  loop: "{{ bins_archive }}"
+- name: bins_archive
+  block:
+    - name: Create archive dir
+      ansible.builtin.file:
+        path: "/tmp/bins_archive"
+        state: directory
 
-- name: Clean
-  become: true
-  ansible.builtin.apt:
-    autoclean: yes
-    autoremove: yes
+    - name: Check if binary already exists in /usr/sbin
+      ansible.builtin.stat:
+        path: "/usr/sbin/{{ item.name }}"
+      register: binary_status
+      loop: "{{ bins_archive }}"
+
+    - name: Download archives if not exist
+      ansible.builtin.get_url:
+        url: "{{ item.item.url }}"
+        dest: "/tmp/bins_archive/{{ item.item.name }}.archive"
+        mode: '0755'
+      loop: "{{ binary_status.results }}"
+      when: not item.stat.exists
+      loop_control:
+        label: "{{ item.item.name }}"
+
+    - name: Extract archives if binary does not exist
+      ansible.builtin.unarchive:
+        src: "/tmp/bins_archive/{{ item.item.name }}.archive"
+        dest: "/tmp/bins_archive"
+        remote_src: yes
+      loop: "{{ binary_status.results }}"
+      when: not item.stat.exists
+      loop_control:
+        label: "{{ item.item.name }}"
+
+    - name: Move binaries to /usr/sbin if not already there
+      become: true
+      ansible.builtin.command:
+        cmd: "find /tmp/bins_archive -type f -name {{ item.item.name }} -exec mv {} /usr/sbin \\;"
+      loop: "{{ binary_status.results }}"
+      when: not item.stat.exists
+      loop_control:
+        label: "{{ item.item.name }}"
+
+    - name: Set permissions for binaries in /usr/sbin
+      become: true
+      ansible.builtin.file:
+        path: "/usr/sbin/{{ item.item.name }}"
+        mode: '0755'
+        owner: root
+        group: root
+      loop: "{{ binary_status.results }}"
+      when: not item.stat.exists
+      loop_control:
+        label: "{{ item.item.name }}"
+
+    - name: Create symlinks if new name is provided and binary does not exist
+      become: true
+      ansible.builtin.file:
+        src: "/usr/sbin/{{ item.item.name }}"
+        dest: "/usr/sbin/{{ item.item.new_name }}"
+        state: link
+      loop: "{{ binary_status.results }}"
+      when:
+        - not item.stat.exists
+        - item.item.new_name is defined
+      loop_control:
+        label: "{{ item.item.new_name | default(item.item.name) }}"
+
+- name: bins
+  block:
+    - name: Check if bin already exists in /usr/sbin
+      ansible.builtin.stat:
+        path: "/usr/sbin/{{ item.name }}"
+      loop: "{{ bins }}"
+      register: bin_status
+
+    - name: Downloading bins if not exists
+      become: true
+      ansible.builtin.get_url:
+        url: "{{ item.item.url }}"
+        dest: "/usr/sbin/{{ item.item.name }}"
+        mode: '0755'
+        owner: root
+        group: root
+      loop: "{{ bin_status.results }}"
+      when: not item.stat.exists
+      loop_control:
+        label: "{{ item.item.name }}"

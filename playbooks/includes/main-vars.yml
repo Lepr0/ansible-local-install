@@ -1,11 +1,8 @@
 # APT
 apts:
-  - gnome-shell-extension-manager
   - gnome-software-plugin-flatpak
-  - gnome-weather
   - gnome-tweaks
   - neofetch
-  - speedtest-cli
   - bind9-dnsutils
   - mc
   - adb
@@ -40,14 +37,31 @@ debs:
 bins_archive: # to /usr/sbin
   - url: https://www.hdsentinel.com/hdslin/hdsentinel-020b-x64.zip
     name: HDSentinel
+    new_name: hdsentinel
+  - url: https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubectx_v0.9.5_linux_x86_64.tar.gz
+    name: kubectx
+  - url: https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubens_v0.9.5_linux_x86_64.tar.gz
+    name: kubens
+  - url: https://install.speedtest.net/app/cli/ookla-speedtest-1.2.0-linux-x86_64.tgz
+    name: speedtest
+  - url: https://get.helm.sh/helm-v3.14.4-linux-amd64.tar.gz
+    name: helm
+
+bins: # to /usr/sbin
+  - url: https://cdn.dl.k8s.io/release/v1.30.0/bin/linux/amd64/kubectl
+    name: kubectl
 
 flatpak_repo: "https://dl.flathub.org/repo/flathub.flatpakrepo"
 
 flatpaks:
+  - org.gnome.Extensions
   - org.gnome.Evolution
+  - org.gnome.Weather
+  - org.gnome.Evince
   - org.telegram.desktop
   - com.google.Chrome
   - ru.yandex.Browser
+  - io.github.seadve.Kooha
   - org.filezillaproject.Filezilla
   - com.jetbrains.DataGrip
   - io.mpv.Mpv # conf
@@ -81,8 +95,6 @@ gnome_extensions:
     name: logo-menu
   - id: 1460
     name: vitals
-  - id: 5904
-    name: volume-scroller
   - id: 5470
     name: weather-oclock
 #  - id: 5278
