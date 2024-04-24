@@ -117,4 +117,4 @@ zsh_custom_plugins_dir: "/home/{{ ansible_env.USER }}/.oh-my-zsh/custom/plugins/
 docker_users:
   - "{{ ansible_env.USER }}"
 
-configs_mpv_folder: /home/{{ ansible_env.USER }}/.config/
+configs_mpv_folder: /home/{{ ansible_env.USER }}/.config
