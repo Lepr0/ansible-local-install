@@ -39,7 +39,7 @@
       ansible.builtin.file:
         path: "/tmp/bins_archive"
         state: directory
-      when: not item.1.stat.exists
+      when: not bin_archive_stat.results[ansible_loop.index0].stat.exists
 
     - name: Download archives if not exist in /usr/sbin
       ansible.builtin.get_url:
@@ -47,7 +47,7 @@
         dest: "/tmp/bins_archive/{{ item.0.name }}.archive"
         mode: '0755'
       loop: "{{ bins_archive|zip(bin_archive_stat.results)|list }}"
-      when: not item.1.stat.exists
+      when: not bin_archive_stat.results[ansible_loop.index0].stat.exists
 
     - name: Extract archives
       ansible.builtin.unarchive:
@@ -55,14 +55,14 @@
         dest: "/tmp/bins_archive"
         remote_src: yes
       loop: "{{ bins_archive|zip(bin_archive_stat.results)|list }}"
-      when: not item.1.stat.exists
+      when: not bin_archive_stat.results[ansible_loop.index0].stat.exists
 
     - name: Find and move the binary to the destination
       become: true
       command:
         cmd: "find /tmp/bins_archive -type f -name '{{ item.0.name }}' -exec mv {} /usr/sbin \\;"
       loop: "{{ bins_archive|zip(bin_archive_stat.results)|list }}"
-      when: not item.1.stat.exists
+      when: not bin_archive_stat.results[ansible_loop.index0].stat.exists
 
     - name: Set permissions for binaries in /usr/sbin
       become: true
@@ -76,7 +76,7 @@
     - name: Symlink if newname exist
       become: true
       ansible.builtin.file:
-        src: mv /usr/sbin/{{ item.0.name }}
+        src: /usr/sbin/{{ item.0.name }}
         dest: /usr/sbin/{{ item.0.new_name }}
         mode: '0755'
         owner: root
@@ -87,7 +87,6 @@
       ansible.builtin.file:
         path: "/tmp/bins_archive"
         state: absent
-      when: temp_dir is defined
 
 - name: bins
   block:
@@ -100,10 +99,10 @@
     - name: Download binary file
       become: true
       ansible.builtin.get_url:
-        src: "{{ item.url }}"
+        url: "{{ item.url }}"
         dest: "/usr/sbin/{{ item.name }}"
       loop: "{{ bins }}"
-      when: not item.1.stat.exists
+      when: not bin_stat.results[ansible_loop.index0].stat.exists
 
     - name: Ensure binary is executable and accessible
       become: true
