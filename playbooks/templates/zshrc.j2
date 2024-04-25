@@ -51,9 +51,9 @@ help() {
 export PATH="$HOME/.local/bin/:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 
-for possiblekey in ${HOME}/.ssh/*_rsa; do
-	if grep -q PRIVATE "$possiblekey"; then
-		ssh-add "$possiblekey" 2>/dev/null
-			fi
-			done
+find "${HOME}/.ssh/" -type f -name "*_rsa" 2>/dev/null | while IFS= read -r possiblekey; do
+  if grep -q "PRIVATE" "$possiblekey"; then
+    ssh-add "$possiblekey" 2>/dev/null
+  fi
+done
 cd ~
