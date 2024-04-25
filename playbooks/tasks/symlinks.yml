@@ -1,0 +1,9 @@
+- name: symlinks
+  block:
+    - name: "SYMLINKS: Create symbolic link"
+      become: true
+      ansible.builtin.file:
+        src: "{{ item.source }}"
+        dest: "{{ item.destination }}"
+        state: link
+      with_item: "{{ symlinks }}"

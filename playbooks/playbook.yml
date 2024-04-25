@@ -11,6 +11,7 @@
     - include_tasks: tasks/flatpak.yml
     - include_tasks: tasks/extensions.yml
     - include_tasks: tasks/zsh.yml
+    - include_tasks: tasks/symlinks.yml
 
   roles:
     - role: ansible-role-docker

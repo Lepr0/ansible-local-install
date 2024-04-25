@@ -127,3 +127,7 @@ docker_users:
 configs_mpv_folder: /home/{{ ansible_env.USER }}/.config
 
 fonts_folder: /home/{{ ansible_env.USER }}/.local/share/fonts
+
+symlinks:
+  - source: /usr/bin/gnome-calculator
+    destination: /usr/bin/calc
