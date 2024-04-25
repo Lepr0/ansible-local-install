@@ -18,3 +18,4 @@
 
   post_tasks:
     - include_tasks: tasks/services-enable.yml
+    - include_tasks: tasks/debug-message.yml
