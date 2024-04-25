@@ -1,23 +1,23 @@
-- name: Copy mpv configs
+- name: mpv
   block:
-    - name: Ensure folder exist
+    - name: "CFG: MPV: Create dir"
       ansible.builtin.file:
         path: "{{ configs_mpv_folder }}"
         state: directory
 
-    - name: Copy the entire mpv directory to ~/.config
+    - name: "CFG: MPV: copy files"
       ansible.posix.synchronize:
         src: "configs/mpv"
         dest: "{{ configs_mpv_folder }}"
 
-- name: Copy fonts
+- name: fonts
   block:
-    - name: Ensure folder exist
+    - name: "CFG: FONTS: Create dir"
       ansible.builtin.file:
         path: "{{ fonts_folder }}"
         state: directory
 
-    - name: Copy the entire mpv directory to fonts folder
+    - name: "CFG: FONTS: copy files"
       ansible.posix.synchronize:
         src: "configs/fonts"
         dest: "{{ fonts_folder }}"

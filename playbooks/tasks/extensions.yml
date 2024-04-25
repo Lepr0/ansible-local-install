@@ -1,12 +1,12 @@
-- name: gnome_extensions script
+- name: gnome_extensions
   block:
-    - name: Check if extension already exists
+    - name: "GNOME EXTENSIONS: Check if extension already installed"
       ansible.builtin.stat:
         path: "{{ gnome_extension_dir }}/{{ item.name }}"
       register: extension_status
       loop: "{{ gnome_extensions }}"
 
-    - name: Install and enable GNOME extensions
+    - name: "GNOME EXTENSIONS: Install and enable extensions"
       ansible.builtin.shell: |
         roles/install-gnome-extensions/install-gnome-extensions.sh --enable {{ item.item.id }}
       loop: "{{ extension_status.results }}"
@@ -14,15 +14,15 @@
       loop_control:
         label: "{{ item.item.name }}"
 
-- name: gnome_extensions_zip archive
+- name: gnome_extensions_zip
   block:
-    - name: Check if extension already exists
+    - name: "GNOME EXTENSIONS ZIP: Check if extension already installed"
       ansible.builtin.stat:
         path: "{{ gnome_extension_dir }}/{{ item.name }}"
       register: extension_zip_status
       loop: "{{ gnome_extensions_zip }}"
 
-    - name: Create temp directory if it does not exist
+    - name: "GNOME EXTENSIONS ZIP: Create temp directory"
       ansible.builtin.file:
         path: "{{ gnome_extension_dir }}/temp"
         state: directory
@@ -31,8 +31,7 @@
       loop_control:
         label: "{{ item.item.name }}"
 
-
-    - name: Download file with custom HTTP headers
+    - name: "GNOME EXTENSIONS ZIP: Download arhive"
       ansible.builtin.get_url:
         url: "{{ item.item.url }}"
         dest: "{{ gnome_extension_dir }}/temp/{{ item.item.name }}.zip"
@@ -41,7 +40,7 @@
       loop_control:
         label: "{{ item.item.name }}"
 
-    - name: Enable GNOME extensions
+    - name: "GNOME EXTENSIONS ZIP: Enable extensions"
       ansible.builtin.shell: |
         gnome-extensions install -f {{ gnome_extension_dir }}/temp/{{ item.item.name }}.zip
       loop: "{{ extension_zip_status.results }}"
@@ -49,14 +48,14 @@
       loop_control:
         label: "{{ item.item.name }}"
 
-    - name: Copy gesture-extension custom config #https://github.com/harshadgavali/gnome-gesture-improvements/issues/206#issuecomment-2026336600
+    - name: "GNOME EXTENSIONS ZIP: custom config for gestureImprovements" #https://github.com/harshadgavali/gnome-gesture-improvements/issues/206#issuecomment-2026336600
       block:
-        - name: Ensure folder exist
+        - name: "GNOME EXTENSIONS: Gesture Improvements: Ensure folder exist"
           ansible.builtin.file:
             path: "{{ gnome_extension_dir }}/gestureImprovements@gestures/src"
             state: directory
 
-        - name: Copy file
+        - name: "GNOME EXTENSIONS: Gesture Improvements: Copy config"
           ansible.posix.synchronize:
-            src: "configs/gesture-extension/snapWindow.js"
+            src: "configs/extension-gesture/snapWindow.js"
             dest: "{{ gnome_extension_dir }}/gestureImprovements@gestures/src/snapWindow.js"
