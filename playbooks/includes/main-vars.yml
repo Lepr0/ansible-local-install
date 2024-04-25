@@ -3,7 +3,3 @@ services_enabled:
 
 docker_users:
   - "{{ ansible_env.USER }}"
-
-symlinks:
-  - source: /usr/bin/gnome-calculator
-    destination: /usr/bin/calc

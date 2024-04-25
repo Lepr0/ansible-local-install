@@ -10,6 +10,7 @@
     - includes/extensions-vars.yml
     - includes/flatpaks-vars.yml
     - includes/zsh-vars.yml
+    - includes/symlinks-vars.yml
 
   pre_tasks:
     - include_tasks: tasks/apt.yml

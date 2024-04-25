@@ -1,0 +1,3 @@
+symlinks:
+  - source: /usr/bin/gnome-calculator
+    destination: /usr/bin/calc
