@@ -1,32 +1,34 @@
-- name: Check ohmyzsh folder
-  ansible.builtin.stat:
-    path: "/home/{{ ansible_env.USER }}/.oh-my-zsh"
-  register: ohmyzsh_folder
+- name: zsh
+  block:
+    - name: "ZSH: Check if ohmyzsh already installed"
+      ansible.builtin.stat:
+        path: "/home/{{ ansible_env.USER }}/.oh-my-zsh"
+      register: ohmyzsh_folder
 
-- name: Install ohmyzsh
-  ansible.builtin.shell: |
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-  when: not ohmyzsh_folder.stat.exists
+    - name: "ZSH: Install ohmyzsh"
+      ansible.builtin.shell: |
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+      when: not ohmyzsh_folder.stat.exists
 
-- name: Change shell
-  become: true
-  ansible.builtin.user:
-    name: "{{ ansible_env.USER }}"
-    shell: /bin/zsh
+    - name: "ZSH: Change default shell"
+      become: true
+      ansible.builtin.user:
+        name: "{{ ansible_env.USER }}"
+        shell: /bin/zsh
 
-- name: Copy config
-  ansible.builtin.template:
-    src: "zshrc.j2"
-    dest: "/home/{{ ansible_env.USER }}/.zshrc"
+    - name: "ZSH: Copy zshrc"
+      ansible.builtin.template:
+        src: "zshrc.j2"
+        dest: "/home/{{ ansible_env.USER }}/.zshrc"
 
-- name: Create a directory if it does not exist
-  ansible.builtin.file:
-    path: "{{ zsh_custom_plugins_dir }}/{{ item.name }}"
-    state: directory
-  with_items: "{{ zsh_custom_plugins }}"
+    - name: "ZSH: Create custom plugin's directory"
+      ansible.builtin.file:
+        path: "{{ zsh_custom_plugins_dir }}/{{ item.name }}"
+        state: directory
+      with_items: "{{ zsh_custom_plugins }}"
 
-- name: Download custom plugins
-  ansible.builtin.git:
-    repo: "{{ item.url }}"
-    dest: "{{ zsh_custom_plugins_dir }}/{{ item.name }}"
-  with_items: "{{ zsh_custom_plugins }}"
+    - name: "ZSH: Download custom plugins"
+      ansible.builtin.git:
+        repo: "{{ item.url }}"
+        dest: "{{ zsh_custom_plugins_dir }}/{{ item.name }}"
+      with_items: "{{ zsh_custom_plugins }}"

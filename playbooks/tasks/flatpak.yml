@@ -1,10 +1,12 @@
-- name: Add flatpack repo
-  become: true
-  ansible.builtin.shell: |
-    flatpak remote-add --if-not-exists flathub {{ flatpak_repo }}
+- name: flatpaks
+  block:
+    - name: "FLATPAKS: Install repo if not exist "
+      become: true
+      ansible.builtin.shell: |
+        flatpak remote-add --if-not-exists flathub {{ flatpak_repo }}
 
-- name: Install multiple packages
-  community.general.flatpak:
-    name: "{{ item }}"
-    state: present
-  loop: "{{ flatpaks }}"
+    - name: "FLATPAKS: Install multiple packages"
+      community.general.flatpak:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ flatpaks }}"

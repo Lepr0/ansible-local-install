@@ -1,0 +1,6 @@
+- name: debug
+  block:
+    - name: "DEBUG: Read after install"
+      ansible.builtin.debug:
+        msg:
+        - "Please REBOOT you laptop"

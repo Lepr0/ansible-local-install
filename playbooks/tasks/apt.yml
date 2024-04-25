@@ -1,18 +1,18 @@
 - name: apt
   block:
-    - name: Update repositories cache
+    - name: "APT: Update repositories cache"
       become: true
       ansible.builtin.apt:
         update_cache: yes
 
-    - name: Install apt packages
+    - name: "APT: Install apt packages"
       become: true
       ansible.builtin.apt:
         name: "{{ item }}"
         state: present
       with_items: "{{ apts }}"
 
-    - name: Clean
+    - name: "APT: Autoclean and autoremove"
       become: true
       ansible.builtin.apt:
         autoclean: yes
@@ -20,7 +20,7 @@
 
 - name: debs
   block:
-    - name: Install deb packages
+    - name: "DEBS: Install deb packages"
       become: true
       ansible.builtin.apt:
         deb: "{{ item }}"
@@ -29,18 +29,18 @@
 
 - name: bins_archive
   block:
-    - name: Create archive dir
+    - name: "BIN archive: Create temp dir"
       ansible.builtin.file:
         path: "/tmp/bins_archive"
         state: directory
 
-    - name: Check if binary already exists in /usr/sbin
+    - name: "BIN archive: Check if binary already installed"
       ansible.builtin.stat:
         path: "/usr/sbin/{{ item.name }}"
       register: binary_status
       loop: "{{ bins_archive }}"
 
-    - name: Download archives if not exist
+    - name: "BIN archive: Download archives"
       ansible.builtin.get_url:
         url: "{{ item.item.url }}"
         dest: "/tmp/bins_archive/{{ item.item.name }}.archive"
@@ -50,7 +50,7 @@
       loop_control:
         label: "{{ item.item.name }}"
 
-    - name: Extract archives if binary does not exist
+    - name: "BIN archive: Extract archives"
       ansible.builtin.unarchive:
         src: "/tmp/bins_archive/{{ item.item.name }}.archive"
         dest: "/tmp/bins_archive"
@@ -60,7 +60,7 @@
       loop_control:
         label: "{{ item.item.name }}"
 
-    - name: Move binaries to /usr/sbin if not already there
+    - name: "BIN archive: Install to /usr/sbin"
       become: true
       ansible.builtin.command:
         cmd: "find /tmp/bins_archive -type f -name {{ item.item.name }} -exec mv {} /usr/sbin \\;"
@@ -69,7 +69,7 @@
       loop_control:
         label: "{{ item.item.name }}"
 
-    - name: Set permissions for binaries in /usr/sbin
+    - name: "BIN archive: Set permissions"
       become: true
       ansible.builtin.file:
         path: "/usr/sbin/{{ item.item.name }}"
@@ -81,7 +81,7 @@
       loop_control:
         label: "{{ item.item.name }}"
 
-    - name: Create symlinks if new name is provided and binary does not exist
+    - name: "BIN archive: Create symlinks if new_name provided"
       become: true
       ansible.builtin.file:
         src: "/usr/sbin/{{ item.item.name }}"
@@ -96,13 +96,13 @@
 
 - name: bins
   block:
-    - name: Check if bin already exists in /usr/sbin
+    - name: "BIN: Check if binary already installed"
       ansible.builtin.stat:
         path: "/usr/sbin/{{ item.name }}"
       loop: "{{ bins }}"
       register: bin_status
 
-    - name: Downloading bins if not exists
+    - name: "BIN: download and install to /usr/sbin"
       become: true
       ansible.builtin.get_url:
         url: "{{ item.item.url }}"
@@ -118,7 +118,7 @@
 ### Remove
 - name: snaps_remove
   block:
-    - name: Remove snap pkgs
+    - name: "SNAP: Remove snap pkgs"
       become: true
       ansible.builtin.shell: |
         snap remove "{{ item }}"
