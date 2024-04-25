@@ -6,4 +6,4 @@
         src: "{{ item.source }}"
         dest: "{{ item.destination }}"
         state: link
-      with_item: "{{ symlinks }}"
+      loop: "{{ symlinks }}"

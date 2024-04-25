@@ -5,7 +5,7 @@
 WIP: waiting for ubuntu 24.04 LTS
 
 Automating the installation and configuration of software on a laptop.
-All vars packages [located here](playbooks/includes/main-vars.yml)
+All vars packages [located here](playbooks/includes)
 
 ## Getting Started
 

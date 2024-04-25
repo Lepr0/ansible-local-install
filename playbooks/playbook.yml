@@ -5,11 +5,17 @@
 
   vars_files:
     - includes/main-vars.yml
+    - includes/apt-vars.yml
+    - includes/configs-vars.yml
+    - includes/extensions-vars.yml
+    - includes/flatpaks-vars.yml
+    - includes/zsh-vars.yml
 
   pre_tasks:
     - include_tasks: tasks/apt.yml
-    - include_tasks: tasks/flatpak.yml
+    - include_tasks: tasks/configs.yml
     - include_tasks: tasks/extensions.yml
+    - include_tasks: tasks/flatpaks.yml
     - include_tasks: tasks/zsh.yml
     - include_tasks: tasks/symlinks.yml
 

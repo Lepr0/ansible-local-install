@@ -1,0 +1,3 @@
+configs_mpv_folder: /home/{{ ansible_env.USER }}/.config
+
+fonts_folder: /home/{{ ansible_env.USER }}/.local/share/fonts
