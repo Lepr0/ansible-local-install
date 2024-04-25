@@ -63,6 +63,7 @@ flatpaks:
   - org.telegram.desktop
   - com.google.Chrome
   - ru.yandex.Browser
+  - org.mozilla.firefox
   - ru.linux_gaming.PortProton
   - io.github.seadve.Kooha
   - org.filezillaproject.Filezilla
@@ -80,26 +81,29 @@ flatpaks:
   - org.remmina.Remmina
   - net.cozic.joplin_desktop
 
+snaps_remove:
+  - firefox
+
 services_enabled:
   - tlp.service
 
 gnome_extensions:
   - id: 8
-    name: places-status-indicator
+    name: places-menu@gnome-shell-extensions.gcampax.github.com
   - id: 517
-    name: caffeine
+    name: caffeine@patapon.info
   - id: 4679
-    name: burn-my-windows
+    name: burn-my-windows@schneegans.github.com
   - id: 5985
-    name: do-not-disturb-while-screen-sharing-or-recording
+    name: do-not-disturb-while-screen-sharing-or-recording@marcinjahn.com
   - id: 5410
-    name: grand-theft-focus
+    name: grand-theft-focus@zalckos.github.com
   - id: 4451
-    name: logo-menu
+    name: logomenu@aryan_k
   - id: 1460
-    name: vitals
+    name: Vitals@CoreCoding.com
   - id: 5470
-    name: weather-oclock
+    name: weatheroclock@CleoMenezesJr.github.io
 #  - id: 5278
 #    name: pano # no 46 support # https://github.com/oae/gnome-shell-pano/issues/271
 #  - id: 2594
