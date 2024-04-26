@@ -1,9 +1,9 @@
 export ZSH="/home/{{ ansible_env.USER }}/.oh-my-zsh"
 
-ZSH_THEME="robbyrussell"
+export ZSH="$HOME/.oh-my-zsh"
 
-HISTSIZE=999999999
-SAVEHIST=$HISTSIZE
+
+ZSH_THEME="robbyrussell"
 
 plugins=(
 zsh-navigation-tools
@@ -19,41 +19,18 @@ ruby
 
 source $ZSH/oh-my-zsh.sh
 
-alias ll='ls -lah'
-alias la='ls -A'
-alias l='ls -CF'
-alias myip='curl -s http://ifconfig.co/json | jq'
-alias p='ping -D -O'
-alias geo='geoiplookup'
-alias ns='nslookup'
-alias fan-enable='sudo sh -c "echo 0 > /sys/devices/platform/asus-nb-wmi/hwmon/hwmon5/pwm2_enable && echo 0 > /sys/devices/platform/asus-nb-wmi/hwmon/hwmon5/pwm1_enable"'
-alias fan-disable='sudo sh -c "echo 2 > /sys/devices/platform/asus-nb-wmi/hwmon/hwmon5/pwm2_enable && echo 2 > /sys/devices/platform/asus-nb-wmi/hwmon/hwmon5/pwm1_enable"'
-alias bat='/usr/bin/batcat --paging=never'
-alias docker-compose='docker compose'
 
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
+alias ll="ls -la"
 
-alias ddel='docker system prune'
-alias drm='docker ps -aq | xargs docker rm'
-alias drmi='docker images -aq | xargs docker rmi'
 
-awsexport() {
-	export AWS_PROFILE="secret"
-	}
-
-###
-help() {
-        curl cheat.sh/$1
-       }
-###
-export PATH="$HOME/.local/bin/:$PATH"
-export PATH=$PATH:/usr/local/go/bin
-
-find "${HOME}/.ssh/" -type f -name "*_rsa" 2>/dev/null | while IFS= read -r possiblekey; do
-  if grep -q "PRIVATE" "$possiblekey"; then
+for possiblekey in ${HOME}/.ssh/*_rsa; do
+  if grep -q PRIVATE "$possiblekey"; then
     ssh-add "$possiblekey" 2>/dev/null
-  fi
-done
+      fi
+      done
 cd ~
+export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+export PATH=$JAVA_HOME/bin:$PATH
+alias vpn='/home/greem/Apps/Outline-Client.AppImage'
+alias ide='/home/greem/IDEA/IntelliJIDEA2024.1\(UltimateEdition\)/bin/idea.sh'
+___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
