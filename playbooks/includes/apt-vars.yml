@@ -29,6 +29,8 @@ apts:
   - maven
 #  - ca-certificates
   - curl
+  - openjdk-21-jdk
+  - maven
 #  - gnupg-agent
 #  - software-properties-common
 
