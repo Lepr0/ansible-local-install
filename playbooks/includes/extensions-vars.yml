@@ -1,20 +1,20 @@
 gnome_extensions:
-  - id: 8
-    name: places-menu@gnome-shell-extensions.gcampax.github.com
-  - id: 517
-    name: caffeine@patapon.info
-  - id: 4679
-    name: burn-my-windows@schneegans.github.com
-  - id: 5985
-    name: do-not-disturb-while-screen-sharing-or-recording@marcinjahn.com
+#  - id: 8
+#    name: places-menu@gnome-shell-extensions.gcampax.github.com
+#  - id: 517
+#    name: caffeine@patapon.info
+#  - id: 4679
+#    name: burn-my-windows@schneegans.github.com
+#  - id: 5985
+#    name: do-not-disturb-while-screen-sharing-or-recording@marcinjahn.com
   - id: 5410
     name: grand-theft-focus@zalckos.github.com
   - id: 4451
     name: logomenu@aryan_k
   - id: 1460
     name: Vitals@CoreCoding.com
-  - id: 5470
-    name: weatheroclock@CleoMenezesJr.github.io
+#  - id: 5470
+#    name: weatheroclock@CleoMenezesJr.github.io
 #  - id: 5278
 #    name: pano # no 46 support # https://github.com/oae/gnome-shell-pano/issues/271
 #  - id: 2594

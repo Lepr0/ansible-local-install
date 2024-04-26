@@ -2,33 +2,33 @@ apts:
   - gnome-software-plugin-flatpak
   - gnome-tweaks
   - neofetch
-  - bind9-dnsutils
+#  - bind9-dnsutils
   - mc
-  - adb
+#  - adb
   - htop
-  - bat
-  - geoip-bin
+#  - bat
+#  - geoip-bin
   - flatpak
   - tilix
   - zsh
   - nvtop
-  - smartmontools
+#  - smartmontools
   - yt-dlp
-  - sshpass
-  #  - terraform
+#  - sshpass
+#  - terraform
   - wget
-  - jq
-  - sed
+#  - jq
+#  - sed
   - unzip
   - timeshift
   - vim
   - tlp
   - tlp-rdw
   - apt-transport-https
-  - ca-certificates
+#  - ca-certificates
   - curl
-  - gnupg-agent
-  - software-properties-common
+#  - gnupg-agent
+#  - software-properties-common
 
 debs:
   - https://repo.yandex.ru/yandex-disk/yandex-disk_latest_amd64.deb

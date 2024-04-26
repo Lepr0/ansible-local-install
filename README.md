@@ -18,7 +18,7 @@ sudo apt -y install git ansible-core
 Then clone this repository and set up the environment:
 ```
 #!/usr/bin/env bash
-git clone https://github.com/Lepr0/ansible-local-install.git
+git clone https://github.com/Greem4/ansible-local-install.git
 cd ansible-local-install
 git submodule init
 git submodule update
