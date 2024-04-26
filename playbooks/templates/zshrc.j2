@@ -23,6 +23,8 @@ source $ZSH/oh-my-zsh.sh
 
 
 alias ll="ls -la"
+alias vpn='/home/greem/Apps/Outline-Client.AppImage'
+alias ide='/home/greem/IDEA/IntelliJIDEA2024.1\(UltimateEdition\)/bin/idea.sh'
 
 
 for possiblekey in ${HOME}/.ssh/*_rsa; do
@@ -33,6 +35,5 @@ for possiblekey in ${HOME}/.ssh/*_rsa; do
 cd ~
 export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
 export PATH=$JAVA_HOME/bin:$PATH
-alias vpn='/home/greem/Apps/Outline-Client.AppImage'
-alias ide='/home/greem/IDEA/IntelliJIDEA2024.1\(UltimateEdition\)/bin/idea.sh'
+
 ___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
