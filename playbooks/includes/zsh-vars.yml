@@ -1,5 +1,7 @@
 zsh_custom_plugins:
   - url: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
     name: zsh-syntax-highlighting
+  - url: "https://github.com/zsh-users/zsh-autosuggestions.git"
+    name: zsh-autosuggestions
 
 zsh_custom_plugins_dir: "/home/{{ ansible_env.USER }}/.oh-my-zsh/custom/plugins/"
