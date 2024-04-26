@@ -26,5 +26,5 @@
   block:
     - name: "CFG: DCONF: load"
       ansible.builtin.shell: |
-        /usr/bin/dconf load {{ item.load_to }} < {{ item.file }}
+        /usr/bin/dconf load {{ item.load_to }} < configs/dconf/{{ item.file }}
       with_items: "{{ configs_dconf }}"
