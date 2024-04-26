@@ -21,3 +21,10 @@
       ansible.posix.synchronize:
         src: "configs/fonts"
         dest: "{{ fonts_folder }}"
+
+- name: dconf
+  block:
+    - name: "CFG: DCONF: load"
+      ansible.builtin.shell: |
+        /usr/bin/dconf load {{ item.load_to }} < {{ item.file }}
+      with_items: "{{ configs_dconf }}"

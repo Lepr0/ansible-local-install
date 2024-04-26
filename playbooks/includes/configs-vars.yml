@@ -1,3 +1,9 @@
 configs_mpv_folder: /home/{{ ansible_env.USER }}/.config
 
 fonts_folder: /home/{{ ansible_env.USER }}/.local/share/fonts
+
+configs_dconf:
+  - file: tilix.dconf
+    load_to: /com/gexperts/Tilix/
+  - file: custom-keybindings.dconf
+    load_to: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/
