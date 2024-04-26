@@ -1,0 +1,9 @@
+[custom0]
+binding='<Super>e'
+command='nautilus'
+name='nautilus'
+
+[custom1]
+binding='Print'
+command='/bin/sh -c -- "flameshot gui""'
+name='Flameshot'

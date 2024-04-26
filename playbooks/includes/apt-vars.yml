@@ -14,6 +14,7 @@ apts:
   - nvtop
 #  - smartmontools
   - yt-dlp
+  - flameshot
 #  - sshpass
 #  - terraform
   - wget
@@ -25,9 +26,7 @@ apts:
   - tlp
   - tlp-rdw
   - apt-transport-https
-  - openjdk-21-jdk
-  - maven
-#  - ca-certificates
+  - ca-certificates
   - curl
   - openjdk-21-jdk
   - maven

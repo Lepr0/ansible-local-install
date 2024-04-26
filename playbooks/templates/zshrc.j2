@@ -7,7 +7,9 @@ ZSH_THEME="robbyrussell"
 
 plugins=(
 zsh-navigation-tools
-zsh-syntax-highlighting
+{% for plugin in zsh_custom_plugins %}
+  {{ plugin.name }}
+{% endfor %}
 git
 bundler
 dotenv
