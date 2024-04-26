@@ -25,6 +25,8 @@ apts:
   - tlp
   - tlp-rdw
   - apt-transport-https
+  - openjdk-21-jdk
+  - maven
 #  - ca-certificates
   - curl
 #  - gnupg-agent
