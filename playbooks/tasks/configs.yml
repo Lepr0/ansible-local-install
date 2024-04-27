@@ -5,7 +5,7 @@
         path: "{{ configs_mpv_folder }}"
         state: directory
 
-    - name: "CFG: MPV: copy files"
+    - name: "CFG: MPV: Copy files"
       ansible.posix.synchronize:
         src: "configs/mpv"
         dest: "{{ configs_mpv_folder }}"
@@ -17,14 +17,26 @@
         path: "{{ fonts_folder }}"
         state: directory
 
-    - name: "CFG: FONTS: copy files"
+    - name: "CFG: FONTS: Copy files"
       ansible.posix.synchronize:
         src: "configs/fonts"
         dest: "{{ fonts_folder }}"
 
 - name: dconf
   block:
-    - name: "CFG: DCONF: load"
+    - name: "CFG: DCONF: Load"
       ansible.builtin.shell: |
         /usr/bin/dconf load {{ item.load_to }} < configs/dconf/{{ item.file }}
       with_items: "{{ configs_dconf }}"
+
+- name: openlens
+  block:
+    - name: "CFG: OPENLENS: Create dir"
+      ansible.builtin.file:
+        path: "{{ configs_openlens_folder }}"
+        state: directory
+
+    - name: "CFG: OPENLENS: Copy files"
+      ansible.posix.synchronize:
+        src: "configs/openlens-node-pod-menu"
+        dest: "{{ configs_mpv_folder }}"
