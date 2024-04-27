@@ -7,3 +7,13 @@
         enabled: yes
         state: started
       loop: "{{ services_enabled }}"
+
+- name: services_masked
+  block:
+    - name: "SERVICES: Mask services"
+      become: true
+      systemd:
+        name: "{{ item }}"
+        masked: true
+        state: stopped
+      loop: "{{ services_masked }}"

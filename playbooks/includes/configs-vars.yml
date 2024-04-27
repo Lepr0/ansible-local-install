@@ -1,4 +1,4 @@
-configs_mpv_folder: /home/{{ ansible_env.USER }}/.config
+configs_mpv_folder: /home/{{ ansible_env.USER }}/.var/app/io.mpv.Mpv/config
 
 fonts_folder: /home/{{ ansible_env.USER }}/.local/share/fonts
 
@@ -7,3 +7,5 @@ configs_dconf:
     load_to: /com/gexperts/Tilix/
   - file: media-keys.dconf
     load_to: /org/gnome/settings-daemon/plugins/media-keys/
+
+configs_openlens_folder: /home/{{ ansible_env.USER }}/.var/app/dev.k8slens.OpenLens/config/OpenLens/node_modules/@alebcay/openlens-node-pod-menu
