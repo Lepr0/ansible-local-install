@@ -32,3 +32,15 @@
         repo: "{{ item.url }}"
         dest: "{{ zsh_custom_plugins_dir }}/{{ item.name }}"
       with_items: "{{ zsh_custom_plugins }}"
+
+    - name: "ZSH: Create custom theme's directory"
+      ansible.builtin.file:
+        path: "{{ zsh_custom_themes_dir }}/{{ item.name }}"
+        state: directory
+      with_items: "{{ zsh_custom_themes }}"
+
+    - name: "ZSH: Download custom themes"
+      ansible.builtin.git:
+        repo: "{{ item.url }}"
+        dest: "{{ zsh_custom_themes_dir }}/{{ item.name }}"
+      with_items: "{{ zsh_custom_themes }}"
