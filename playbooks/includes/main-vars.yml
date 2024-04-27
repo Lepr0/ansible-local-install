@@ -1,5 +1,8 @@
 services_enabled:
   - tlp.service
 
+services_masked:
+  - power-profiles-daemon.service
+
 docker_users:
   - "{{ ansible_env.USER }}"
