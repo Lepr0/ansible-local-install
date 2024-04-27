@@ -1,0 +1,12 @@
+[/]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']
+
+[custom-keybindings/custom0]
+binding='<Super>e'
+command='/usr/bin/nautilus'
+name='nautilus'
+
+[custom-keybindings/custom1]
+binding='Print'
+command='/bin/sh -c -- "flameshot gui"'
+name='Flameshot'
