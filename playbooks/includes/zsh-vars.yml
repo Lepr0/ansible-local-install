@@ -8,6 +8,6 @@ zsh_custom_plugins_dir: "/home/{{ ansible_env.USER }}/.oh-my-zsh/custom/plugins/
 
 zsh_custom_themes:
   - url: "https://github.com/romkatv/powerlevel10k.git"
-    name: powerlevel10k/powerlevel10k
+    name: powerlevel10k
 
 zsh_custom_themes_dir: "/home/{{ ansible_env.USER }}/.oh-my-zsh/custom/themes/"
