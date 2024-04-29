@@ -1,7 +1,7 @@
 flatpak_repo: "https://dl.flathub.org/repo/flathub.flatpakrepo"
 
 flatpaks:
-  - org.gnome.Extensions
+  - com.mattjakeman.ExtensionManager
   - org.gnome.Evolution
   - org.gnome.Weather
   - org.gnome.Evince
