@@ -3,8 +3,8 @@ gnome_extensions:
     name: caffeine@patapon.info
   - id: 4679
     name: burn-my-windows@schneegans.github.com
-  - id: 5985
-    name: do-not-disturb-while-screen-sharing-or-recording@marcinjahn.com
+#  - id: 5985
+#    name: do-not-disturb-while-screen-sharing-or-recording@marcinjahn.com
   - id: 5410
     name: grand-theft-focus@zalckos.github.com
   - id: 4451
