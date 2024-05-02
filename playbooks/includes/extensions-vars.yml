@@ -15,10 +15,10 @@ gnome_extensions:
     name: Vitals@CoreCoding.com
   - id: 5470
     name: weatheroclock@CleoMenezesJr.github.io
+  - id: 2594
+    name: always-indicator
 #  - id: 5278
 #    name: pano # no 46 support # https://github.com/oae/gnome-shell-pano/issues/271
-#  - id: 2594
-#    name: always-indicator # no 46 support # https://github.com/mzur/gnome-shell-always-indicator/issues/21
 
 gnome_extensions_zip: #name should be uuid from metadata.json
   - url: "https://github.com/harshadgavali/gnome-gesture-improvements/files/14779174/gestureImprovements46%40gestures.zip"
