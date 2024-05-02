@@ -4,7 +4,6 @@ flatpaks:
   - com.mattjakeman.ExtensionManager
   - com.google.Chrome
   - ru.yandex.Browser
-  - ru.linux_gaming.PortProton
   - io.github.seadve.Kooha
   - org.filezillaproject.Filezilla
   - org.keepassxc.KeePassXC
@@ -12,4 +11,3 @@ flatpaks:
   - org.getoutline.OutlineClient
   - dev.k8slens.OpenLens
   - org.qbittorrent.qBittorrent
-  - org.remmina.Remmina

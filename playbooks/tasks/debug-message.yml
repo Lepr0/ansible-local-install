@@ -7,5 +7,8 @@
         - "~/.aws dir"
         - "~/.kube dir"
         - "~/.ssh dir"
+        - "~/.config/yandex-disk dir"
+        - "~/.gitconfig file"
+        - "~/.zsh_history file"
         - "awsexport in ~/.zshrc"
         - "Please REBOOT your laptop"

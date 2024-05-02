@@ -3,8 +3,6 @@ snaps_install_orig:
   - firefox
   - joplin-desktop
   - onlyoffice-desktopeditors
-  - steam
-  - gimp
 
 snaps_install_classic:
   - datagrip

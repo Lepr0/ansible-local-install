@@ -4,6 +4,8 @@ apts:
   - evolution
   - gnome-weather
   - mpv
+  - remmina
+  - gimp
   - neofetch
   - bind9-dnsutils
   - mc
@@ -35,6 +37,8 @@ apts:
 
 debs:
   - https://repo.yandex.ru/yandex-disk/yandex-disk_latest_amd64.deb
+  - https://cdn.akamai.steamstatic.com/client/installer/steam.deb
+  - https://github.com/Castro-Fidel/PortProton_dpkg/releases/download/portproton_1.4-1_amd64/portproton_1.4-1_amd64.deb
 
 bins_archive: # to /usr/sbin
   - url: https://www.hdsentinel.com/hdslin/hdsentinel-020b-x64.zip
