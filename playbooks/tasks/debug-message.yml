@@ -3,4 +3,9 @@
     - name: "DEBUG: Read after install"
       ansible.builtin.debug:
         msg:
+        - "Do not forget:"
+        - "~/.aws dir"
+        - "~/.kube dir"
+        - "~/.ssh dir"
+        - "awsexport in ~/.zshrc"
         - "Please REBOOT your laptop"
