@@ -1,6 +1,4 @@
 gnome_extensions:
-  - id: 8
-    name: places-menu@gnome-shell-extensions.gcampax.github.com
   - id: 517
     name: caffeine@patapon.info
   - id: 4679

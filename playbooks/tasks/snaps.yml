@@ -1,0 +1,21 @@
+- name: snaps
+  block:
+    - name: "SNAP: Install snap pkgs default opt"
+      become: true
+      community.general.snap:
+        name: "{{ item }}"
+      with_items: "{{ snaps_install_orig }}"
+
+    - name: "SNAP: Install snap pkgs classic opt"
+      become: true
+      community.general.snap:
+        name: "{{ item }}"
+        classic: true
+      with_items: "{{ snaps_install_classic }}"
+
+    - name: "SNAP: Remove snap pkgs"
+      become: true
+      community.general.snap:
+        name: "{{ item }}"
+        state: absent
+      with_items: "{{ snaps_remove }}"

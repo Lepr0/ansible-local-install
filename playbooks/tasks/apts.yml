@@ -114,12 +114,3 @@
       when: not item.stat.exists
       loop_control:
         label: "{{ item.item.name }}"
-
-### Remove
-- name: snaps_remove
-  block:
-    - name: "SNAP: Remove snap pkgs"
-      become: true
-      ansible.builtin.shell: |
-        snap remove "{{ item }}"
-      with_items: "{{ snaps_remove }}"

@@ -9,11 +9,12 @@ All vars packages [located here](playbooks/includes)
 
 ## Getting Started
 
-Install `git` and `ansible-core` first using `apt` (for Debian/Ubuntu-based systems):
+Install `git` and `ansible` first using `apt` (for Debian/Ubuntu-based systems):
 
 ```
 #!/usr/bin/env bash
-sudo apt -y install git ansible-core
+sudo apt -y install git ansible-core && \
+ansible-galaxy collection install community.general
 ```
 Then clone this repository and set up the environment:
 ```

@@ -1,6 +1,9 @@
 apts:
   - gnome-software-plugin-flatpak
   - gnome-tweaks
+  - evolution
+  - gnome-weather
+  - mpv
   - neofetch
   - bind9-dnsutils
   - mc
@@ -51,7 +54,3 @@ bins: # to /usr/sbin
     name: kubectl
   - url: https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
     name: argocd
-
-###---to remove---###
-snaps_remove:
-  - firefox

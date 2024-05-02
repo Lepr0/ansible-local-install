@@ -1,0 +1,14 @@
+snaps_install_orig:
+  - telegram-desktop
+  - firefox
+  - joplin-desktop
+  - onlyoffice-desktopeditors
+  - steam
+  - gimp
+
+snaps_install_classic:
+  - datagrip
+  - code
+
+snaps_remove:
+  - terminal-parrot

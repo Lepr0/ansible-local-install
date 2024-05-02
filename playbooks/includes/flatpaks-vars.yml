@@ -2,26 +2,14 @@ flatpak_repo: "https://dl.flathub.org/repo/flathub.flatpakrepo"
 
 flatpaks:
   - com.mattjakeman.ExtensionManager
-  - org.gnome.Evolution
-  - org.gnome.Weather
-  - org.gnome.Evince
-  - org.telegram.desktop
   - com.google.Chrome
   - ru.yandex.Browser
-  - org.mozilla.firefox
   - ru.linux_gaming.PortProton
   - io.github.seadve.Kooha
   - org.filezillaproject.Filezilla
-  - com.jetbrains.DataGrip
-  - io.mpv.Mpv
-  - org.gimp.GIMP
-  - org.onlyoffice.desktopeditors
   - org.keepassxc.KeePassXC
   - org.getoutline.OutlineManager
   - org.getoutline.OutlineClient
   - dev.k8slens.OpenLens
-  - com.valvesoftware.Steam
   - org.qbittorrent.qBittorrent
-  - com.slack.Slack
   - org.remmina.Remmina
-  - net.cozic.joplin_desktop
