@@ -40,7 +40,7 @@
   block:
     - name: "BIN archive: Check if binary already installed"
       ansible.builtin.stat:
-        path: "/usr/sbin/{{ item.name }}"
+        path: "/usr/bin/{{ item.name }}"
       register: binary_status
       loop: "{{ bins_archive }}"
 
@@ -71,10 +71,10 @@
       loop_control:
         label: "{{ item.item.name }}"
 
-    - name: "BIN archive: Install to /usr/sbin"
+    - name: "BIN archive: Install to /usr/bin"
       become: true
       ansible.builtin.command:
-        cmd: "find /tmp/bins_archive -type f -name {{ item.item.name }} -exec mv {} /usr/sbin \\;"
+        cmd: "find /tmp/bins_archive -type f -name {{ item.item.name }} -exec mv {} /usr/bin \\;"
       loop: "{{ binary_status.results }}"
       when: not item.stat.exists
       loop_control:
@@ -83,7 +83,7 @@
     - name: "BIN archive: Set permissions"
       become: true
       ansible.builtin.file:
-        path: "/usr/sbin/{{ item.item.name }}"
+        path: "/usr/bin/{{ item.item.name }}"
         mode: '0755'
         owner: root
         group: root
@@ -95,8 +95,8 @@
     - name: "BIN archive: Create symlinks if new_name provided"
       become: true
       ansible.builtin.file:
-        src: "/usr/sbin/{{ item.item.name }}"
-        dest: "/usr/sbin/{{ item.item.new_name }}"
+        src: "/usr/bin/{{ item.item.name }}"
+        dest: "/usr/bin/{{ item.item.new_name }}"
         state: link
       loop: "{{ binary_status.results }}"
       when:
@@ -109,15 +109,15 @@
   block:
     - name: "BIN: Check if binary already installed"
       ansible.builtin.stat:
-        path: "/usr/sbin/{{ item.name }}"
+        path: "/usr/bin/{{ item.name }}"
       loop: "{{ bins }}"
       register: bin_status
 
-    - name: "BIN: download and install to /usr/sbin"
+    - name: "BIN: download and install to /usr/bin"
       become: true
       ansible.builtin.get_url:
         url: "{{ item.item.url }}"
-        dest: "/usr/sbin/{{ item.item.name }}"
+        dest: "/usr/bin/{{ item.item.name }}"
         mode: '0755'
         owner: root
         group: root

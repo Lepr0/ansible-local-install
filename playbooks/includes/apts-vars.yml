@@ -54,7 +54,7 @@ debs: # to /usr/bin (default)
   - url: https://github.com/Castro-Fidel/PortProton_dpkg/releases/download/portproton_1.4-1_amd64/portproton_1.4-1_amd64.deb
     name: portproton
 
-bins_archive: # to /usr/sbin
+bins_archive: # to /usr/bin
   - url: https://www.hdsentinel.com/hdslin/hdsentinel-020b-x64.zip
     name: HDSentinel
     new_name: hdsentinel
@@ -67,7 +67,7 @@ bins_archive: # to /usr/sbin
   - url: https://get.helm.sh/helm-v3.14.4-linux-amd64.tar.gz
     name: helm
 
-bins: # to /usr/sbin
+bins: # to /usr/bin
   - url: https://cdn.dl.k8s.io/release/v1.30.0/bin/linux/amd64/kubectl
     name: kubectl
   - url: https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
