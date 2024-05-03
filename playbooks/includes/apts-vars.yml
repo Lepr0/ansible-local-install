@@ -22,6 +22,7 @@ apts:
   - nvtop
   - smartmontools
   - yt-dlp
+  - pwgen
   - sshpass
   - flameshot
   - wget
