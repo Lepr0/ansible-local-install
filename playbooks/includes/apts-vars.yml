@@ -38,14 +38,21 @@ apts:
   - gnupg-agent
   - software-properties-common
 
-debs:
-  - https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
-  - https://github.com/MuhammedKalkan/OpenLens/releases/download/v6.5.2-366/OpenLens-6.5.2-366.amd64.deb
-  - https://repo.yandex.ru/yandex-browser/deb/pool/main/y/yandex-browser-stable/yandex-browser-stable_24.4.1.915-1_amd64.deb
-  - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - https://repo.yandex.ru/yandex-disk/yandex-disk_latest_amd64.deb
-  - https://cdn.akamai.steamstatic.com/client/installer/steam.deb
-  - https://github.com/Castro-Fidel/PortProton_dpkg/releases/download/portproton_1.4-1_amd64/portproton_1.4-1_amd64.deb
+debs: # to /usr/bin (default)
+  - url: https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
+    name: onlyoffice-desktopeditors
+  - url: https://github.com/MuhammedKalkan/OpenLens/releases/download/v6.5.2-366/OpenLens-6.5.2-366.amd64.deb
+    name: open-lens
+  - url: https://repo.yandex.ru/yandex-browser/deb/pool/main/y/yandex-browser-stable/yandex-browser-stable_24.4.1.915-1_amd64.deb
+    name: yandex-browser
+  - url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    name: google-chrome
+  - url: https://repo.yandex.ru/yandex-disk/yandex-disk_latest_amd64.deb
+    name: yandex-disk
+  - url: https://cdn.akamai.steamstatic.com/client/installer/steam.deb
+    name: steam
+  - url: https://github.com/Castro-Fidel/PortProton_dpkg/releases/download/portproton_1.4-1_amd64/portproton_1.4-1_amd64.deb
+    name: portproton
 
 bins_archive: # to /usr/sbin
   - url: https://www.hdsentinel.com/hdslin/hdsentinel-020b-x64.zip

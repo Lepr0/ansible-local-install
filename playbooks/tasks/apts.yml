@@ -20,12 +20,21 @@
 
 - name: debs
   block:
+    - name: "DEBS: Check if deb already installed"
+      ansible.builtin.stat:
+        path: "/usr/bin/{{ item.name }}"
+      register: debs_status
+      loop: "{{ debs }}"
+
     - name: "DEBS: Install deb packages"
       become: true
       ansible.builtin.apt:
-        deb: "{{ item }}"
+        deb: "{{ item.item.url }}"
         state: present
-      with_items: "{{ debs }}"
+      loop: "{{ debs_status.results }}"
+      when: not item.stat.exists
+      loop_control:
+        label: "{{ item.item.name }}"
 
 - name: bins_archive
   block:
