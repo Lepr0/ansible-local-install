@@ -19,11 +19,11 @@ gnome_extensions:
     name: pano@elhan.io
   - id: 4245
     name: gestureImprovements@gestures
-  - id:
+  - id: 5135
     name: audio-selector@harald65.simon.gmail.com
-  - id:
+  - id: 3906
     name: RemoveAppMenu@Dragon8oy.com
-  - id:
+  - id: 3733
     name: tiling-assistant@leleat-on-github
   - id: 3933
     name: toggle-night-light@cansozbir.github.io

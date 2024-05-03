@@ -19,7 +19,6 @@ apts:
   - flatpak
   - tilix
   - zsh
-  - nvtop
   - smartmontools
   - yt-dlp
   - pwgen

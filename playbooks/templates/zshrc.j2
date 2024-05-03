@@ -58,4 +58,3 @@ find "${HOME}/.ssh/" -type f -name "*_rsa" 2>/dev/null | while IFS= read -r poss
     ssh-add "$possiblekey" 2>/dev/null
   fi
 done
-cd ~
