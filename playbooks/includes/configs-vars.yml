@@ -8,6 +8,6 @@ configs_dconf:
   - file: media-keys.dconf
     load_to: /org/gnome/settings-daemon/plugins/media-keys/
 
-configs_openlens_folder: /home/{{ ansible_env.USER }}/.config/OpenLens/node_modules/@alebcay/openlens-node-pod-menu
+configs_openlens_folder: /home/{{ ansible_env.USER }}/.k8slens/extensions/alebcay--openlens-node-pod-menu
 
-icons_folder: "/home/{{ ansible_env.USER }}/.icons"
+icons_folder: "/home/{{ ansible_env.USER }}"

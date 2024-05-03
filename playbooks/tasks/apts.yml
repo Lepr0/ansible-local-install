@@ -1,119 +1,3 @@
-- name: apt
-  block:
-    - name: "APT: Update repositories cache"
-      become: true
-      ansible.builtin.apt:
-        update_cache: yes
-
-    - name: "APT: Install apt packages"
-      become: true
-      ansible.builtin.apt:
-        name: "{{ item }}"
-        state: present
-      with_items: "{{ apts }}"
-
-    - name: "APT: Autoclean and autoremove"
-      become: true
-      ansible.builtin.apt:
-        autoclean: yes
-        autoremove: yes
-
-- name: debs
-  block:
-    - name: "DEBS: Install deb packages"
-      become: true
-      ansible.builtin.apt:
-        deb: "{{ item }}"
-        state: present
-      with_items: "{{ debs }}"
-
-- name: bins_archive
-  block:
-    - name: "BIN archive: Create temp dir"
-      ansible.builtin.file:
-        path: "/tmp/bins_archive"
-        state: directory
-
-    - name: "BIN archive: Check if binary already installed"
-      ansible.builtin.stat:
-        path: "/usr/sbin/{{ item.name }}"
-      register: binary_status
-      loop: "{{ bins_archive }}"
-
-    - name: "BIN archive: Download archives"
-      ansible.builtin.get_url:
-        url: "{{ item.item.url }}"
-        dest: "/tmp/bins_archive/{{ item.item.name }}.archive"
-        mode: '0755'
-      loop: "{{ binary_status.results }}"
-      when: not item.stat.exists
-      loop_control:
-        label: "{{ item.item.name }}"
-
-    - name: "BIN archive: Extract archives"
-      ansible.builtin.unarchive:
-        src: "/tmp/bins_archive/{{ item.item.name }}.archive"
-        dest: "/tmp/bins_archive"
-        remote_src: yes
-      loop: "{{ binary_status.results }}"
-      when: not item.stat.exists
-      loop_control:
-        label: "{{ item.item.name }}"
-
-    - name: "BIN archive: Install to /usr/sbin"
-      become: true
-      ansible.builtin.command:
-        cmd: "find /tmp/bins_archive -type f -name {{ item.item.name }} -exec mv {} /usr/sbin \\;"
-      loop: "{{ binary_status.results }}"
-      when: not item.stat.exists
-      loop_control:
-        label: "{{ item.item.name }}"
-
-    - name: "BIN archive: Set permissions"
-      become: true
-      ansible.builtin.file:
-        path: "/usr/sbin/{{ item.item.name }}"
-        mode: '0755'
-        owner: root
-        group: root
-      loop: "{{ binary_status.results }}"
-      when: not item.stat.exists
-      loop_control:
-        label: "{{ item.item.name }}"
-
-    - name: "BIN archive: Create symlinks if new_name provided"
-      become: true
-      ansible.builtin.file:
-        src: "/usr/sbin/{{ item.item.name }}"
-        dest: "/usr/sbin/{{ item.item.new_name }}"
-        state: link
-      loop: "{{ binary_status.results }}"
-      when:
-        - not item.stat.exists
-        - item.item.new_name is defined
-      loop_control:
-        label: "{{ item.item.new_name | default(item.item.name) }}"
-
-- name: bins
-  block:
-    - name: "BIN: Check if binary already installed"
-      ansible.builtin.stat:
-        path: "/usr/sbin/{{ item.name }}"
-      loop: "{{ bins }}"
-      register: bin_status
-
-    - name: "BIN: download and install to /usr/sbin"
-      become: true
-      ansible.builtin.get_url:
-        url: "{{ item.item.url }}"
-        dest: "/usr/sbin/{{ item.item.name }}"
-        mode: '0755'
-        owner: root
-        group: root
-      loop: "{{ bin_status.results }}"
-      when: not item.stat.exists
-      loop_control:
-        label: "{{ item.item.name }}"
 
 - name: appimage
   block:
@@ -134,14 +18,13 @@
       register: app_status
 
     - name: "APPIMAGE: download and install to ~/.apps"
-      become: true
       ansible.builtin.get_url:
         url: "{{ item.item.url }}"
         dest: "/home/{{ ansible_env.USER }}/.apps/{{ item.item.name }}"
         mode: '0755'
         owner: "{{ ansible_env.USER }}"
         group: "{{ ansible_env.USER }}"
-      loop: "{{ bin_status.results }}"
+      loop: "{{ app_status.results }}"
       when: not item.stat.exists
       loop_control:
         label: "{{ item.item.name }}"
@@ -149,5 +32,5 @@
     - name: "APPIMAGE: Template desktop"
       ansible.builtin.template:
         src: "desktop/{{ item.desktop_name }}.j2"
-        path: "/home/{{ ansible_env.USER }}/.local/share/applications/{{ item.desktop_name }}"
-        loop: "{{ appimage }}"
+        dest: "/home/{{ ansible_env.USER }}/.local/share/applications/{{ item.desktop_name }}"
+      loop: "{{ appimage }}"

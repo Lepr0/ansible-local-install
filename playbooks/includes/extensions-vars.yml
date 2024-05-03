@@ -14,14 +14,18 @@ gnome_extensions:
   - id: 5470
     name: weatheroclock@CleoMenezesJr.github.io
   - id: 2594
-    name: always-indicator
+    name: always-indicator@martin.zurowietz.de
   - id: 5278
-    name: pano
+    name: pano@elhan.io
   - id: 4245
     name: gestureImprovements@gestures
+  - id:
+    name: audio-selector@harald65.simon.gmail.com
+  - id:
+    name: RemoveAppMenu@Dragon8oy.com
+  - id:
+    name: tiling-assistant@leleat-on-github
+  - id: 3933
+    name: toggle-night-light@cansozbir.github.io
 
-#gnome_extensions_zip: #name should be uuid from metadata.json
-#  - url: "https://github.com/harshadgavali/gnome-gesture-improvements/files/14779174/gestureImprovements46%40gestures.zip"
-#    name: gestureImprovements@gestures
-#
-#gnome_extension_dir: "/home/{{ ansible_env.USER }}/.local/share/gnome-shell/extensions/"
+gnome_extension_dir: "/home/{{ ansible_env.USER }}/.local/share/gnome-shell/extensions/"

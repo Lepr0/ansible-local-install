@@ -51,4 +51,4 @@
     - name: "CFG: ICONS: Copy files"
       ansible.posix.synchronize:
         src: "configs/icons"
-        dest: "{{ fonts_folder }}"
+        dest: "{{ icons_folder }}"

@@ -15,7 +15,8 @@ Install `git` and `ansible` first using `apt` (for Debian/Ubuntu-based systems):
 ```
 #!/usr/bin/env bash
 sudo apt -y install git ansible-core && \
-ansible-galaxy collection install community.general
+ansible-galaxy collection install community.general && \
+ansible-galaxy collection install ansible.posix
 ```
 Then clone this repository and set up the environment:
 ```
