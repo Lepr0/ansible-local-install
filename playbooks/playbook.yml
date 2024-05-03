@@ -7,7 +7,6 @@
     - includes/main-vars.yml
     - includes/apts-vars.yml
     - includes/extensions-vars.yml
-    - includes/flatpaks-vars.yml
     - includes/snaps-vars.yml
     - includes/zsh-vars.yml
     - includes/configs-vars.yml
@@ -16,7 +15,6 @@
   pre_tasks:
     - include_tasks: tasks/apts.yml
     - include_tasks: tasks/extensions.yml
-    - include_tasks: tasks/flatpaks.yml
     - include_tasks: tasks/snaps.yml
     - include_tasks: tasks/zsh.yml
     - include_tasks: tasks/configs.yml

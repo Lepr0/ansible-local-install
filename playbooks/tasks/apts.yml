@@ -114,3 +114,40 @@
       when: not item.stat.exists
       loop_control:
         label: "{{ item.item.name }}"
+
+- name: appimage
+  block:
+    - name: "APPIMAGE: Create app dir"
+      ansible.builtin.file:
+        path: "/home/{{ ansible_env.USER }}/.apps"
+        state: directory
+
+    - name: "APPIMAGE: Create desktop dir"
+      ansible.builtin.file:
+        path: "/home/{{ ansible_env.USER }}/.local/share/applications"
+        state: directory
+
+    - name: "APPIMAGE: Check if app already installed"
+      ansible.builtin.stat:
+        path: "/home/{{ ansible_env.USER }}/.apps/{{ item.name }}"
+      loop: "{{ appimage }}"
+      register: app_status
+
+    - name: "APPIMAGE: download and install to ~/.apps"
+      become: true
+      ansible.builtin.get_url:
+        url: "{{ item.item.url }}"
+        dest: "/home/{{ ansible_env.USER }}/.apps/{{ item.item.name }}"
+        mode: '0755'
+        owner: "{{ ansible_env.USER }}"
+        group: "{{ ansible_env.USER }}"
+      loop: "{{ bin_status.results }}"
+      when: not item.stat.exists
+      loop_control:
+        label: "{{ item.item.name }}"
+
+    - name: "APPIMAGE: Template desktop"
+      ansible.builtin.template:
+        src: "desktop/{{ item.desktop_name }}.j2"
+        path: "/home/{{ ansible_env.USER }}/.local/share/applications/{{ item.desktop_name }}"
+        loop: "{{ appimage }}"

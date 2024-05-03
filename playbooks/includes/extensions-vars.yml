@@ -16,10 +16,12 @@ gnome_extensions:
   - id: 2594
     name: always-indicator
   - id: 5278
-    name: pano # no 46 support # https://github.com/oae/gnome-shell-pano/issues/271
-
-gnome_extensions_zip: #name should be uuid from metadata.json
-  - url: "https://github.com/harshadgavali/gnome-gesture-improvements/files/14779174/gestureImprovements46%40gestures.zip"
+    name: pano
+  - id: 4245
     name: gestureImprovements@gestures
 
-gnome_extension_dir: "/home/{{ ansible_env.USER }}/.local/share/gnome-shell/extensions/"
+#gnome_extensions_zip: #name should be uuid from metadata.json
+#  - url: "https://github.com/harshadgavali/gnome-gesture-improvements/files/14779174/gestureImprovements46%40gestures.zip"
+#    name: gestureImprovements@gestures
+#
+#gnome_extension_dir: "/home/{{ ansible_env.USER }}/.local/share/gnome-shell/extensions/"

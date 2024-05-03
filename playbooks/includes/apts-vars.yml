@@ -1,11 +1,14 @@
 apts:
-  - gnome-software-plugin-flatpak
+  - gnome-shell-extension-manager
   - gnome-tweaks
   - evolution
   - gnome-weather
   - mpv
   - remmina
   - gimp
+  - filezilla
+  - keepassxc
+  - qbittorrent
   - neofetch
   - bind9-dnsutils
   - mc
@@ -36,6 +39,10 @@ apts:
   - software-properties-common
 
 debs:
+  - https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
+  - https://github.com/MuhammedKalkan/OpenLens/releases/download/v6.5.2-366/OpenLens-6.5.2-366.amd64.deb
+  - https://repo.yandex.ru/yandex-browser/deb/pool/main/y/yandex-browser-stable/yandex-browser-stable_24.4.1.915-1_amd64.deb
+  - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   - https://repo.yandex.ru/yandex-disk/yandex-disk_latest_amd64.deb
   - https://cdn.akamai.steamstatic.com/client/installer/steam.deb
   - https://github.com/Castro-Fidel/PortProton_dpkg/releases/download/portproton_1.4-1_amd64/portproton_1.4-1_amd64.deb
@@ -58,3 +65,11 @@ bins: # to /usr/sbin
     name: kubectl
   - url: https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
     name: argocd
+
+appimage: # to ~/.apps
+  - url: https://s3.amazonaws.com/outline-releases/client/linux/stable/Outline-Client.AppImage
+    name: Outline-Client.AppImage
+    desktop_name: Outline-Client.desktop
+  - url: https://s3.amazonaws.com/outline-releases/manager/linux/stable/Outline-Manager.AppImage
+    name: Outline-Manager.AppImage
+    desktop_name: Outline-Manager.desktop

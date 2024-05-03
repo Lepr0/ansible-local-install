@@ -40,3 +40,15 @@
       ansible.posix.synchronize:
         src: "configs/openlens-node-pod-menu"
         dest: "{{ configs_mpv_folder }}"
+
+- name: icons
+  block:
+    - name: "CFG: ICONS: Create dir"
+      ansible.builtin.file:
+        path: "{{ icons_folder }}"
+        state: directory
+
+    - name: "CFG: ICONS: Copy files"
+      ansible.posix.synchronize:
+        src: "configs/icons"
+        dest: "{{ fonts_folder }}"

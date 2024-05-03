@@ -1,8 +1,6 @@
 snaps_install_orig:
-  - telegram-desktop
   - firefox
   - joplin-desktop
-  - onlyoffice-desktopeditors
 
 snaps_install_classic:
   - datagrip
