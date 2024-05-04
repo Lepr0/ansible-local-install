@@ -25,6 +25,8 @@ apts:
   - sshpass
   - flameshot
   - wget
+  - gir1.2-gtop-2.0
+  - lm-sensors
   - jq
   - sed
   - unzip

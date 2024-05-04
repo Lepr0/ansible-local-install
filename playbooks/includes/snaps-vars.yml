@@ -2,6 +2,7 @@ snaps_install_orig:
   - firefox
   - joplin-desktop
   - nvtop
+  - telegram-desktop
 
 snaps_install_classic:
   - datagrip
